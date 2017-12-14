@@ -2,7 +2,10 @@ Package: epidemr
 Type: Package
 Title: What the Package Does (Title Case)
 Version: 0.1.0
-Author: Who wrote it
+Authors@R: as.person(c(
+    "Stella Mazeri <stella.mazeri@ed.ac.uk> [aut, cre]", 
+    "Ian Handel <ian.handel@ed.ac.uk> [aut]"
+  ))
 Maintainer: The package maintainer <yourself@somewhere.net>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
