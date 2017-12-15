@@ -11,9 +11,9 @@
 #' @examples
 #' head(mtcars)
 #' tab <- epi_2by2(mtcars, hp>100, am==1)
-#' qplot(tab)
+#' plot(tab)
 
-qplot <- function(object){
+plot <- function(object){
   plot(object[["table"]],
        main = "",
        col = viridis::viridis(n = 2, alpha = 0.75, begin = 0.15, end = 0.3))
