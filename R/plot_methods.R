@@ -13,7 +13,7 @@
 #' tab <- epi_2by2(mtcars, hp>100, am==1)
 #' plot(tab)
 
-plot <- function(object){
+plot.epi_2by2 <- function(object){
   plot(object[["table"]],
        main = "",
        col = viridis::viridis(n = 2, alpha = 0.75, begin = 0.15, end = 0.3))
