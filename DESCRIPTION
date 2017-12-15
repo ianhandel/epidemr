@@ -1,15 +1,15 @@
 Package: epidemr
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Tidy Epidemiology in R
 Version: 0.1.0
 Authors@R: as.person(c(
     "Stella Mazeri <stella.mazeri@ed.ac.uk> [aut, cre]", 
     "Ian Handel <ian.handel@ed.ac.uk> [aut]"
   ))
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Maintainer: Stella Mazeri <stella.mazeri@ed.ac.uk>
+Description: Need more about what it does.
+        And how.
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
