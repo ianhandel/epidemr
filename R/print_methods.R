@@ -10,7 +10,7 @@
 
 
 print.epi_2by2 <- function(object){
-  stopifnot(class(object) == "epi_2by2")
+  assertthat::assert_that(class(object) == "epi_2by2")
 
   print(object[["table"]])
 }
