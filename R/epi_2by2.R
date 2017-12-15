@@ -2,17 +2,20 @@
 #'
 #' A technology test rather than a final product
 #'
-#' Introduce S3 class epi and explore printing and plotting methods
+#' Given two columns of a dataframe (and 'positive' levels) generate a 2 x 2
+#' table and appropriate summary statsitics.
 #'
 #' @param df A dataframe
 #' @param outcome The unquoted column name for outcome.
 #' @param exposure The unquoted column name for exposure
+#' @param study_type The study type "cross", "cohort" or "case-control"
 #' @param outcome_positive The "level" for a positive / of interest outcome
 #' @param outcome_negative The "level" for a positive / of interest exposure
 #' @param conf_level Probability for confidence interval calculations
 #' @return Returns an epi_2by2 object.
 #' @examples
-#' epi_2by2(mtcars, gear, carb)
+#' head(mtcars)
+#' epi_2by2(mtcars, hp>100, am==1)
 
 # TODO for output - inspired by EpiTools from Ausvet
 # 2 x 2 table! DONE
@@ -38,6 +41,7 @@
 epi_2by2 <- function(df,
                      outcome,
                      exposure,
+                     study_type = "cross",
                      outcome_positive = TRUE,
                      exposure_positive = TRUE,
                      conf_level = 0.95){
@@ -66,7 +70,8 @@ epi_2by2 <- function(df,
                      sum(!is.na(outcome_vec)),
                      conf.level = conf_level)
 
-  return(structure(list(table = tbl,
+  return(structure(list(study_type = study_type,
+                        table = tbl,
                         expected = chisq[["expected"]],
                         chisq_pvalue = chisq[["p.value"]],
                         prev_all = prev[["estimate"]][[1]],

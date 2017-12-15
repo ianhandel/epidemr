@@ -4,8 +4,8 @@
 \alias{epi_2by2}
 \title{Two by two table analysis}
 \usage{
-epi_2by2(df, outcome, exposure, outcome_positive = TRUE,
-  exposure_positive = TRUE, conf_level = 0.95)
+epi_2by2(df, outcome, exposure, study_type = "cross",
+  outcome_positive = TRUE, exposure_positive = TRUE, conf_level = 0.95)
 }
 \arguments{
 \item{df}{A dataframe}
@@ -13,6 +13,8 @@ epi_2by2(df, outcome, exposure, outcome_positive = TRUE,
 \item{outcome}{The unquoted column name for outcome.}
 
 \item{exposure}{The unquoted column name for exposure}
+
+\item{study_type}{The study type "cross", "cohort" or "case-control"}
 
 \item{outcome_positive}{The "level" for a positive / of interest outcome}
 
@@ -27,8 +29,10 @@ Returns an epi_2by2 object.
 A technology test rather than a final product
 }
 \details{
-Introduce S3 class epi and explore printing and plotting methods
+Given two columns of a dataframe (and 'positive' levels) generate a 2 x 2
+table and appropriate summary statsitics.
 }
 \examples{
-epi_2by2(mtcars, gear, carb)
+head(mtcars)
+epi_2by2(mtcars, hp>100, am==1)
 }

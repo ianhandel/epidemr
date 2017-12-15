@@ -8,14 +8,19 @@ qplot(object)
 }
 \arguments{
 \item{object}{An epi_2by2 object}
+
+\item{colours}{A palette of four colours}
 }
 \description{
 A technology test rather than a final product
 }
 \details{
 Introduce S3 class epi and explore printing and plotting methods
+
+This needs A LOT of work
 }
 \examples{
-tab <- epi_2by2(mtcars, gear, carb)
+head(mtcars)
+tab <- epi_2by2(mtcars, hp>100, am==1)
 qplot(tab)
 }
