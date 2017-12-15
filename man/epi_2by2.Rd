@@ -14,7 +14,7 @@ epi_2by2(df, outcome, exposure)
 \item{exposure}{The unquoted column name for exposure}
 }
 \value{
-To return relevant summary data.
+Returns an epi_2by2 object.
 }
 \description{
 A technology test rather than a final product
