@@ -16,4 +16,6 @@ RoxygenNote: 6.0.1
 Imports:
     dplyr,
     ggplot2,
-    assertthat
+    assertthat,
+    purrr,
+    viridis
