@@ -7,14 +7,17 @@
 #' @param df A dataframe
 #' @param outcome The unquoted column name for outcome.
 #' @param exposure The unquoted column name for exposure
+#' @param outcome_positive The "level" for a positive / of interest outcome
+#' @param outcome_negative The "level" for a positive / of interest exposure
+#' @param conf_level Probability for confidence interval calculations
 #' @return Returns an epi_2by2 object.
 #' @examples
 #' epi_2by2(mtcars, gear, carb)
 
 # TODO for output - inspired by EpiTools from Ausvet
-# 2 x 2 table!
-# expected values 2 x 2
-# Overall Incidence/Prevalence
+# 2 x 2 table! DONE
+# expected values 2 x 2 DONE
+# Overall Incidence/Prevalence DONE
 # Incidence/Prevalence in Exposed
 # Incidence/Prevalence in Unexposed
 # Odds Ratio
@@ -32,7 +35,12 @@
 
 
 
-epi_2by2 <- function(df, outcome, exposure){
+epi_2by2 <- function(df,
+                     outcome,
+                     exposure,
+                     outcome_positive = TRUE,
+                     exposure_positive = TRUE,
+                     conf_level = 0.95){
 
   outcome <- rlang::enquo(outcome)
   exposure <- rlang::enquo(exposure)
@@ -40,16 +48,29 @@ epi_2by2 <- function(df, outcome, exposure){
   df <- dplyr::mutate(df, ..outcome = !!outcome)
   df <- dplyr::mutate(df, ..exposure = !!exposure)
 
-  assertthat::assert_that(length(unique(df[["..outcome"]])) == 2)
-  assertthat::assert_that(length(unique(df[["..exposure"]])) == 2)
+  outcome_vec <- df[["..outcome"]]
+  exposure_vec <- df[["..exposure"]]
+
+  assertthat::assert_that(length(unique(outcome_vec)) == 2)
+  assertthat::assert_that(length(unique(exposure_vec)) == 2)
 
   col_names <- c(rlang::quo_text(outcome), rlang::quo_text(exposure))
 
-  tbl <- table(df[["..outcome"]],
-               df[["..exposure"]],
-               dnn = col_names)
+  tbl <- t(table(outcome_vec,
+               exposure_vec,
+               dnn = col_names))
 
-  return(structure(list(table = tbl),
+  suppressWarnings(chisq <- chisq.test(tbl))
+
+  prev <- binom.test(sum(outcome_vec == outcome_positive, na.rm = TRUE),
+                     sum(!is.na(outcome_vec)),
+                     conf.level = conf_level)
+
+  return(structure(list(table = tbl,
+                        expected = chisq[["expected"]],
+                        chisq_pvalue = chisq[["p.value"]],
+                        prev_all = prev[["estimate"]][[1]],
+                        prev_all_ci = prev[["conf.int"]]),
                    class = "epi_2by2"))
 }
 

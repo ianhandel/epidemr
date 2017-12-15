@@ -4,7 +4,8 @@
 \alias{epi_2by2}
 \title{Two by two table analysis}
 \usage{
-epi_2by2(df, outcome, exposure)
+epi_2by2(df, outcome, exposure, outcome_positive = TRUE,
+  exposure_positive = TRUE, conf_level = 0.95)
 }
 \arguments{
 \item{df}{A dataframe}
@@ -12,6 +13,12 @@ epi_2by2(df, outcome, exposure)
 \item{outcome}{The unquoted column name for outcome.}
 
 \item{exposure}{The unquoted column name for exposure}
+
+\item{outcome_positive}{The "level" for a positive / of interest outcome}
+
+\item{conf_level}{Probability for confidence interval calculations}
+
+\item{outcome_negative}{The "level" for a positive / of interest exposure}
 }
 \value{
 Returns an epi_2by2 object.
