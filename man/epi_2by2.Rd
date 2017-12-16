@@ -30,7 +30,7 @@ A technology test rather than a final product
 }
 \details{
 Given two columns of a dataframe (and 'positive' levels) generate a 2 x 2
-table and appropriate summary statsitics.
+table and appropriate summary statsitics
 }
 \examples{
 head(mtcars)

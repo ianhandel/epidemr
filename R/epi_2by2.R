@@ -3,7 +3,7 @@
 #' A technology test rather than a final product
 #'
 #' Given two columns of a dataframe (and 'positive' levels) generate a 2 x 2
-#' table and appropriate summary statsitics.
+#' table and appropriate summary statsitics
 #'
 #' @param df A dataframe
 #' @param outcome The unquoted column name for outcome.
