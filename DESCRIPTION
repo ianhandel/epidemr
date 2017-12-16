@@ -18,5 +18,7 @@ Imports:
     ggplot2,
     assertthat,
     purrr,
+    rlang,
+    stats,
     viridis
 Suggests: testthat
