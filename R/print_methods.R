@@ -6,7 +6,7 @@
 #' @param object An epi_2by2 object
 #' @examples
 #' head(mtcars)
-#' epi_2by2(mtcars, hp>100, am==1)
+#' tab <- epi_2by2(mtcars, hp>100, am==1)
 #' print(tab)
 
 
