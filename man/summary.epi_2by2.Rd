@@ -4,10 +4,12 @@
 \alias{summary.epi_2by2}
 \title{Two by two table summary}
 \usage{
-\method{summary}{epi_2by2}(object)
+\method{summary}{epi_2by2}(object, ...)
 }
 \arguments{
 \item{object}{An epi_2by2 object}
+
+\item{...}{Other arguments}
 }
 \value{
 Returns a sumamry of aepi_2by2 object.
@@ -21,7 +23,6 @@ Summary method for epi_2by2 class
 This needs A LOT of work
 }
 \examples{
-library(epi_2by2)
 head(mtcars)
 epi <- epi_2by2(mtcars, hp>100, am==1)
 summary(epi)

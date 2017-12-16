@@ -10,11 +10,10 @@
 #' @param exposure The unquoted column name for exposure
 #' @param study_type The study type "cross", "cohort" or "case-control"
 #' @param outcome_positive The "level" for a positive / of interest outcome
-#' @param outcome_negative The "level" for a positive / of interest exposure
+#' @param exposure_positive The "level" for a positive / of interest exposure
 #' @param conf_level Probability for confidence interval calculations
 #' @return Returns an epi_2by2 object.
 #' @examples
-#' library(epi_2by2)
 #' head(mtcars)
 #' epi_2by2(mtcars, hp>100, am==1)
 

@@ -18,9 +18,9 @@ epi_2by2(df, outcome, exposure, study_type = "cross",
 
 \item{outcome_positive}{The "level" for a positive / of interest outcome}
 
-\item{conf_level}{Probability for confidence interval calculations}
+\item{exposure_positive}{The "level" for a positive / of interest exposure}
 
-\item{outcome_negative}{The "level" for a positive / of interest exposure}
+\item{conf_level}{Probability for confidence interval calculations}
 }
 \value{
 Returns an epi_2by2 object.
@@ -33,7 +33,6 @@ Given two columns of a dataframe (and 'positive' levels) generate a 2 x 2
 table and appropriate summary statsitics
 }
 \examples{
-library(epi_2by2)
 head(mtcars)
 epi_2by2(mtcars, hp>100, am==1)
 }

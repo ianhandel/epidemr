@@ -3,16 +3,16 @@
 #' A technology test rather than a final product
 #'
 #'
-#' @param object An epi_2by2 object
+#' @param x An epi_2by2 object
+#' @param ... Other arguments
 #' @examples
-#' library(epi_2by2)
 #' head(mtcars)
 #' tab <- epi_2by2(mtcars, hp>100, am==1)
 #' print(tab)
 
 
-print.epi_2by2 <- function(object){
-  assertthat::assert_that(class(object) == "epi_2by2")
+print.epi_2by2 <- function(x, ...){
+  assertthat::assert_that(class(x) == "epi_2by2")
 
-  print(object[["table"]])
+  print(x[["table"]])
 }

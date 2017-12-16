@@ -4,16 +4,17 @@
 \alias{print.epi_2by2}
 \title{Print method for epi_2by2 class}
 \usage{
-\method{print}{epi_2by2}(object)
+\method{print}{epi_2by2}(x, ...)
 }
 \arguments{
-\item{object}{An epi_2by2 object}
+\item{x}{An epi_2by2 object}
+
+\item{...}{Other arguments}
 }
 \description{
 A technology test rather than a final product
 }
 \examples{
-library(epi_2by2)
 head(mtcars)
 tab <- epi_2by2(mtcars, hp>100, am==1)
 print(tab)

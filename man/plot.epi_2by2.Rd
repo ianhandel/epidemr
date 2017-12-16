@@ -4,12 +4,12 @@
 \alias{plot.epi_2by2}
 \title{Two by two table plot}
 \usage{
-\method{plot}{epi_2by2}(object)
+\method{plot}{epi_2by2}(x, ...)
 }
 \arguments{
-\item{object}{An epi_2by2 object}
+\item{x}{An epi_2by2 object}
 
-\item{colours}{A palette of four colours}
+\item{...}{Other arguments}
 }
 \description{
 A technology test rather than a final product
@@ -20,7 +20,6 @@ Introduce S3 class epi and explore printing and plotting methods
 This needs A LOT of work
 }
 \examples{
-library(epi_2by2)
 head(mtcars)
 tab <- epi_2by2(mtcars, hp>100, am==1)
 plot(tab)
