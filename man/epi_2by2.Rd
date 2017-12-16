@@ -33,6 +33,7 @@ Given two columns of a dataframe (and 'positive' levels) generate a 2 x 2
 table and appropriate summary statsitics
 }
 \examples{
+library(epi_2by2)
 head(mtcars)
 epi_2by2(mtcars, hp>100, am==1)
 }

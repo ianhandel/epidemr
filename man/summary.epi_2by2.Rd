@@ -21,7 +21,8 @@ Summary method for epi_2by2 class
 This needs A LOT of work
 }
 \examples{
+library(epi_2by2)
 head(mtcars)
-epi_2by2(mtcars, hp>100, am==1)
-#' summary(ep)
+epi <- epi_2by2(mtcars, hp>100, am==1)
+summary(epi)
 }

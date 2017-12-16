@@ -9,9 +9,10 @@
 #' @param object An epi_2by2 object
 #' @return Returns a sumamry of aepi_2by2 object.
 #' @examples
+#' library(epi_2by2)
 #' head(mtcars)
-#' epi_2by2(mtcars, hp>100, am==1)
-#' #' summary(ep)
+#' epi <- epi_2by2(mtcars, hp>100, am==1)
+#' summary(epi)
 
 summary.epi_2by2 <- function(object){
   purrr::map(object, I)

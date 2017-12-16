@@ -14,6 +14,7 @@
 #' @param conf_level Probability for confidence interval calculations
 #' @return Returns an epi_2by2 object.
 #' @examples
+#' library(epi_2by2)
 #' head(mtcars)
 #' epi_2by2(mtcars, hp>100, am==1)
 

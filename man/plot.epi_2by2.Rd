@@ -20,6 +20,7 @@ Introduce S3 class epi and explore printing and plotting methods
 This needs A LOT of work
 }
 \examples{
+library(epi_2by2)
 head(mtcars)
 tab <- epi_2by2(mtcars, hp>100, am==1)
 plot(tab)
