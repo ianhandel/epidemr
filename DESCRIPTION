@@ -19,3 +19,4 @@ Imports:
     assertthat,
     purrr,
     viridis
+Suggests: testthat
