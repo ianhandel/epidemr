@@ -13,10 +13,11 @@
 #' @param exposure_positive The "level" for a positive / of interest exposure
 #' @param conf_level Probability for confidence interval calculations
 #' @return Returns an epi_2by2 object.
+#' @export
 #' @examples
 #' head(mtcars)
 #' epi_2by2(mtcars, hp>100, am==1)
-#' @export
+
 
 
 # TODO for output - inspired by EpiTools from Ausvet

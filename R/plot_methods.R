@@ -8,15 +8,15 @@
 #'
 #' @param x An epi_2by2 object
 #' @param ... Other arguments
+#' @export
 #' @examples
 #' head(mtcars)
 #' tab <- epi_2by2(mtcars, hp>100, am==1)
 #' plot(tab)
-#' @export
 
 
 plot.epi_2by2 <- function(x,...){
-  plot(x[["table"]],
+  graphics::plot(x[["table"]],
        main = "",
        col = viridis::viridis(n = 2, alpha = 0.75, begin = 0.15, end = 0.3))
 }
