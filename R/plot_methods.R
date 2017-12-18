@@ -12,6 +12,8 @@
 #' head(mtcars)
 #' tab <- epi_2by2(mtcars, hp>100, am==1)
 #' plot(tab)
+#' @export
+
 
 plot.epi_2by2 <- function(x,...){
   plot(x[["table"]],

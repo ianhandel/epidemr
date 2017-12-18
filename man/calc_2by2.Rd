@@ -2,7 +2,8 @@
 % Please edit documentation in R/epi_2by2.R
 \name{calc_2by2}
 \alias{calc_2by2}
-\title{Calculate statistoics for 2 x 2 table}
+\title{Calculate statistics for 2 x 2 table
+Internal function for epidemr}
 \usage{
 calc_2by2(outcome, exposure, col_names, conf_level)
 }
@@ -20,8 +21,4 @@ Returns an epi_2by2 object.
 }
 \description{
 Given two logical vectors calculate relevant 2 x 2 statistocs
-}
-\examples{
-head(mtcars)
-epi_2by2(mtcars, hp>100, am==1)
 }

@@ -16,6 +16,8 @@
 #' @examples
 #' head(mtcars)
 #' epi_2by2(mtcars, hp>100, am==1)
+#' @export
+
 
 # TODO for output - inspired by EpiTools from Ausvet
 # 2 x 2 table! DONE
@@ -72,8 +74,8 @@ epi_2by2 <- function(df,
 }
 
 
-#' Calculate statistoics for 2 x 2 table
-#'
+#' Calculate statistics for 2 x 2 table
+#' Internal function for epidemr
 #'
 #' Given two logical vectors calculate relevant 2 x 2 statistocs
 #'
@@ -83,8 +85,7 @@ epi_2by2 <- function(df,
 #' @param conf_level Probability for confidence interval calculations
 #' @return Returns an epi_2by2 object.
 #' @examples
-#' head(mtcars)
-#' epi_2by2(mtcars, hp>100, am==1)
+
 
 calc_2by2 <- function(outcome, exposure, col_names, conf_level){
 
@@ -92,9 +93,9 @@ calc_2by2 <- function(outcome, exposure, col_names, conf_level){
                  exposure,
                  dnn = col_names))
 
-  suppressWarnings(chisq <- chisq.test(tbl))
+  suppressWarnings(chisq <- stats::chisq.test(tbl))
 
-  prev <- binom.test(sum(outcome, na.rm = TRUE),
+  prev <- stats::binom.test(sum(outcome, na.rm = TRUE),
                      sum(!is.na(outcome)),
                      conf.level = conf_level)
 
