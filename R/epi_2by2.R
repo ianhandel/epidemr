@@ -60,24 +60,49 @@ epi_2by2 <- function(df,
 
   col_names <- c(rlang::quo_text(outcome), rlang::quo_text(exposure))
 
-  tbl <- t(table(outcome_vec,
-               exposure_vec,
-               dnn = col_names))
+  res <- calc_2by2(outcome_vec == outcome_positive,
+                   exposure_vec == exposure_positive,
+                   col_names,
+                   conf_level)
 
-  suppressWarnings(chisq <- chisq.test(tbl))
+  res <- structure(c(res, study_type),
+                   class = "epi_2by2")
 
-  prev <- binom.test(sum(outcome_vec == outcome_positive, na.rm = TRUE),
-                     sum(!is.na(outcome_vec)),
-                     conf.level = conf_level)
-
-  return(structure(list(study_type = study_type,
-                        table = tbl,
-                        expected = chisq[["expected"]],
-                        chisq_pvalue = chisq[["p.value"]],
-                        prev_all = prev[["estimate"]][[1]],
-                        prev_all_ci = prev[["conf.int"]]),
-                   class = "epi_2by2"))
+  return(res)
 }
 
 
+#' Calculate statistoics for 2 x 2 table
+#'
+#'
+#' Given two logical vectors calculate relevant 2 x 2 statistocs
+#'
+#' @param outcome Logical vector for outcome.
+#' @param exposure Logical vector for exposure
+#' @param col_names Character vector, length 2, to name outcome and exposure
+#' @param conf_level Probability for confidence interval calculations
+#' @return Returns an epi_2by2 object.
+#' @examples
+#' head(mtcars)
+#' epi_2by2(mtcars, hp>100, am==1)
+
+calc_2by2 <- function(outcome, exposure, col_names, conf_level){
+
+  tbl <- t(table(outcome,
+                 exposure,
+                 dnn = col_names))
+
+  suppressWarnings(chisq <- chisq.test(tbl))
+
+  prev <- binom.test(sum(outcome, na.rm = TRUE),
+                     sum(!is.na(outcome)),
+                     conf.level = conf_level)
+
+  return(list(table = tbl,
+              expected = chisq[["expected"]],
+              chisq_pvalue = chisq[["p.value"]],
+              prev_all = prev[["estimate"]][[1]],
+              prev_all_ci = prev[["conf.int"]]))
+
+}
 
