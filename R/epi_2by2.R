@@ -85,7 +85,6 @@ epi_2by2 <- function(df,
 #' @param col_names Character vector, length 2, to name outcome and exposure
 #' @param conf_level Probability for confidence interval calculations
 #' @return Returns an epi_2by2 object.
-#' @examples
 
 
 calc_2by2 <- function(outcome, exposure, col_names, conf_level){
