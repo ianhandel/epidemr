@@ -43,6 +43,7 @@ result <- dat %>%
   unnest(result) %>%
   rename(proportion = mean)
 
+result
 
 # plot estimates from the 10 tests, sort tests by mean prevelence
 ggplot(result, aes(forcats::fct_reorder(elisa_test, proportion, mean),

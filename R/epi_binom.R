@@ -1,4 +1,4 @@
-#' Binomial estimates from dataframe column or vector
+#' Binomial estimates from dataframe column
 #'
 #' A wrapper for binom::binom.confint  called with a data.frame and
 #' unquoted columns or expressions.
@@ -12,7 +12,7 @@
 #' @param conf_level Probability for confidence interval calculations
 #' @param methods Confidence interval method see ?binom::binom.confint
 #' @param ... Additional arguments for binom::binom.confint "bayes" method
-#' @return Returns an epi_2by2 object.
+#' @return Returns an epi_binom object.
 #' @export
 #' @examples
 #' head(mtcars)
