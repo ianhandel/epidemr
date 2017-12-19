@@ -40,7 +40,7 @@ epi_binom <- function(df,
                               methods = methods,
                               ...)
   # add conf_level as variable
-  res <- mutate(res, conf_level = conf_level)
+  res <- dplyr::mutate(res, conf_level = conf_level)
 
   res <- structure(tibble::as.tibble(res),
                    class = c("epi_binom", "tbl_df", "tbl", "data.frame"))
