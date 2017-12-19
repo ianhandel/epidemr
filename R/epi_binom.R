@@ -39,6 +39,11 @@ epi_binom <- function(df,
                               conf.level = conf_level,
                               methods = methods,
                               ...)
+  # add conf_level to CI
+  res <- purrr::set_names(res,
+                          dplyr::case_when(names(res) == "lower" ~ paste0("lower_", conf_level),
+                                                names(res) == "upper" ~ paste0("upper_", conf_level),
+                                                TRUE ~ names(res)))
 
   res <- structure(tibble::as.tibble(res),
                    class = c("epi_binom", "tbl_df", "tbl", "data.frame"))
