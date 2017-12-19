@@ -2,7 +2,7 @@
 % Please edit documentation in R/epi_binom.R
 \name{epi_binom}
 \alias{epi_binom}
-\title{Binomial estimates from dataframe column or vector}
+\title{Binomial estimates from dataframe column}
 \usage{
 epi_binom(df, var, var_positive = TRUE, conf_level = 0.95,
   methods = "all", ...)
@@ -21,7 +21,7 @@ epi_binom(df, var, var_positive = TRUE, conf_level = 0.95,
 \item{...}{Additional arguments for binom::binom.confint "bayes" method}
 }
 \value{
-Returns an epi_2by2 object.
+Returns an epi_binom object - this includes a variable for conf_level.
 }
 \description{
 A wrapper for binom::binom.confint  called with a data.frame and

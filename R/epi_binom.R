@@ -12,7 +12,7 @@
 #' @param conf_level Probability for confidence interval calculations
 #' @param methods Confidence interval method see ?binom::binom.confint
 #' @param ... Additional arguments for binom::binom.confint "bayes" method
-#' @return Returns an epi_binom object.
+#' @return Returns an epi_binom object - this includes a variable for conf_level.
 #' @export
 #' @examples
 #' head(mtcars)
@@ -39,11 +39,8 @@ epi_binom <- function(df,
                               conf.level = conf_level,
                               methods = methods,
                               ...)
-  # add conf_level to CI
-  res <- purrr::set_names(res,
-                          dplyr::case_when(names(res) == "lower" ~ paste0("lower_", conf_level),
-                                                names(res) == "upper" ~ paste0("upper_", conf_level),
-                                                TRUE ~ names(res)))
+  # add conf_level as variable
+  res <- mutate(res, conf_level = conf_level)
 
   res <- structure(tibble::as.tibble(res),
                    class = c("epi_binom", "tbl_df", "tbl", "data.frame"))
