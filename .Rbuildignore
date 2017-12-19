@@ -3,3 +3,4 @@
 ^\.travis\.yml$
 ^demo_stuff$
 ^appveyor\.yml$
+^codecov\.yml$
