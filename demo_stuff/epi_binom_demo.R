@@ -1,5 +1,5 @@
 library(tidyverse)
-devtools::install_github("ianhandel/epidemr")
+# devtools::install_github("ianhandel/epidemr")
 library(epidemr)
 
 head(mpg)
@@ -48,8 +48,8 @@ result
 # plot estimates from the 10 tests, sort tests by mean prevelence
 ggplot(result, aes(forcats::fct_reorder(elisa_test, proportion, mean),
                    proportion,
-                   ymin = lower_0.99,
-                   ymax = upper_0.99,
+                   ymin = lower,
+                   ymax = upper,
                    colour = division)) +
   geom_pointrange(position = position_dodge(w = 0.6), size = 0.2) +
   theme(axis.text.x = element_text(angle = 90)) +
