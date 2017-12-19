@@ -11,6 +11,7 @@
 #' @param var_positive The "level" for a positive / of interest outcome
 #' @param conf_level Probability for confidence interval calculations
 #' @param methods Confidence interval method see ?binom::binom.confint
+#' @param digits Rounding digits
 #' @param ... Additional arguments for binom::binom.confint "bayes" method
 #' @return Returns an epi_binom object - this includes a variable for conf_level.
 #' @export
@@ -24,6 +25,7 @@ epi_binom <- function(df,
                       var_positive = TRUE,
                       conf_level = 0.95,
                       methods = "all",
+                      digits,
                       ...){
 
   var <- rlang::enquo(var)
@@ -42,7 +44,14 @@ epi_binom <- function(df,
   # add conf_level as variable
   res <- dplyr::mutate(res,
                        conf_level = conf_level)
+
   res <- dplyr::rename(res, proportion = mean)
+
+  if(!missing(digits)){
+    res <- tibble::as_tibble(purrr::map_if(res,
+                                           purrr::is_bare_numeric,
+                                           round, digits))
+  }
 
   res <- structure(tibble::as.tibble(res),
                    class = c("epi_binom", "tbl_df", "tbl", "data.frame"))

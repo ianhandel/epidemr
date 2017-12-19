@@ -5,7 +5,7 @@
 \title{Binomial estimates from dataframe column}
 \usage{
 epi_binom(df, var, var_positive = TRUE, conf_level = 0.95,
-  methods = "all", ...)
+  methods = "all", digits, ...)
 }
 \arguments{
 \item{df}{A dataframe}
@@ -17,6 +17,8 @@ epi_binom(df, var, var_positive = TRUE, conf_level = 0.95,
 \item{conf_level}{Probability for confidence interval calculations}
 
 \item{methods}{Confidence interval method see ?binom::binom.confint}
+
+\item{digits}{Rounding digits}
 
 \item{...}{Additional arguments for binom::binom.confint "bayes" method}
 }
