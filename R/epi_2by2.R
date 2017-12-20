@@ -1,7 +1,5 @@
 #' Two by two table analysis
-#'
-#' A technology test rather than a final product
-#'
+#'#'
 #' Given two columns of a dataframe (and 'positive' levels) generate a 2 x 2
 #' table and appropriate summary statsitics
 #'
@@ -20,87 +18,42 @@
 
 
 
-# TODO for output - inspired by EpiTools from Ausvet
-# 2 x 2 table! DONE
-# expected values 2 x 2 DONE
-# Overall Incidence/Prevalence DONE
-# Incidence/Prevalence in Exposed
-# Incidence/Prevalence in Unexposed
-# Odds Ratio
-# Relative Risk (Cross-sectional study)
-# Attributable Risk
-# Attributable fraction in Exposed
-# Population Attributable Risk
-# Population Attributable Fraction
-# Tests - statistic and p-value
-# Uncorrected Chi-square
-# Yates corrected Chi-square
-# Fisher's exact test (2-tailed)
-# Fisher's exact test (1-tailed)
-# McNemar's test (paired data)
-
-
 
 epi_2by2 <- function(df,
                      outcome,
                      exposure,
-                     study_type = "cross",
                      outcome_positive = TRUE,
                      exposure_positive = TRUE,
-                     conf_level = 0.95){
+                     method = "cohort.count",
+                     conf_level = 0.95,
+                     homogeneity = "breslow.day",
+                     outcome_format = "as.columns"){
 
   outcome <- rlang::enquo(outcome)
   exposure <- rlang::enquo(exposure)
 
   df <- dplyr::mutate(df, ..outcome = !!outcome)
   df <- dplyr::mutate(df, ..exposure = !!exposure)
+  df <- dplyr::mutate_at(df, dplyr::vars(..outcome, ..exposure),
+                         ~ factor(dplyr::case_when(.x == FALSE ~ "negative",
+                                                          .x == TRUE ~ "positive",
+                                                          TRUE ~ NA_character_),
+                                        levels = c("positive", "negative")))
 
   outcome_vec <- df[["..outcome"]]
   exposure_vec <- df[["..exposure"]]
 
   col_names <- c(rlang::quo_text(outcome), rlang::quo_text(exposure))
 
-  res <- calc_2by2(outcome_vec == outcome_positive,
-                   exposure_vec == exposure_positive,
-                   col_names,
-                   conf_level)
-
-  res <- structure(c(res, study_type),
-                   class = "epi_2by2")
+  res <- epiR::epi.2by2(table(outcome_vec,
+                              exposure_vec),
+                        method = method,
+                        homogeneity = homogeneity,
+                        conf.level = conf_level,
+                        outcome = outcome_format)
 
   return(res)
 }
 
 
-#' Calculate statistics for 2 x 2 table
-#' Internal function for epidemr
-#'
-#' Given two logical vectors calculate relevant 2 x 2 statistocs
-#'
-#' @param outcome Logical vector for outcome.
-#' @param exposure Logical vector for exposure
-#' @param col_names Character vector, length 2, to name outcome and exposure
-#' @param conf_level Probability for confidence interval calculations
-#' @return Returns an epi_2by2 object.
-
-
-calc_2by2 <- function(outcome, exposure, col_names, conf_level){
-
-  tbl <- t(table(outcome,
-                 exposure,
-                 dnn = col_names))
-
-  suppressWarnings(chisq <- stats::chisq.test(tbl))
-
-  prev <- stats::binom.test(sum(outcome, na.rm = TRUE),
-                     sum(!is.na(outcome)),
-                     conf.level = conf_level)
-
-  return(list(table = tbl,
-              expected = chisq[["expected"]],
-              chisq_pvalue = chisq[["p.value"]],
-              prev_all = prev[["estimate"]][[1]],
-              prev_all_ci = prev[["conf.int"]]))
-
-}
 
