@@ -58,9 +58,6 @@ epi_2by2 <- function(df,
   outcome_vec <- df[["..outcome"]]
   exposure_vec <- df[["..exposure"]]
 
-  assertthat::assert_that(length(unique(outcome_vec)) == 2)
-  assertthat::assert_that(length(unique(exposure_vec)) == 2)
-
   col_names <- c(rlang::quo_text(outcome), rlang::quo_text(exposure))
 
   res <- calc_2by2(outcome_vec == outcome_positive,
