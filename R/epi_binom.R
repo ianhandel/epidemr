@@ -26,34 +26,41 @@ epi_binom <- function(df,
                       conf_level = 0.95,
                       methods = "all",
                       digits,
-                      ...){
-
+                      ...) {
   var <- rlang::enquo(var)
 
-  df <- dplyr::mutate(df, ..var = !!var)
+  df <- dplyr::mutate(df, ..var = !! var)
 
   var_vec <- df[["..var"]]
 
   col_name <- rlang::quo_text(var)
 
-  res <- binom::binom.confint(x = sum(var_vec == var_positive),
-                              n = sum(!is.na(var_vec)),
-                              conf.level = conf_level,
-                              methods = methods,
-                              ...)
+  res <- binom::binom.confint(
+    x = sum(var_vec == var_positive),
+    n = sum(!is.na(var_vec)),
+    conf.level = conf_level,
+    methods = methods,
+    ...
+  )
   # add conf_level as variable
-  res <- dplyr::mutate(res,
-                       conf_level = conf_level)
+  res <- dplyr::mutate(
+    res,
+    conf_level = conf_level
+  )
 
   res <- dplyr::rename(res, proportion = mean)
 
-  if(!missing(digits)){
-    res <- tibble::as_tibble(purrr::map_if(res,
-                                           purrr::is_bare_numeric,
-                                           round, digits))
+  if (!missing(digits)) {
+    res <- tibble::as_tibble(purrr::map_if(
+      res,
+      purrr::is_bare_numeric,
+      round, digits
+    ))
   }
 
-  res <- structure(tibble::as.tibble(res),
-                   class = c("epi_binom", "tbl_df", "tbl", "data.frame"))
+  res <- structure(
+    tibble::as.tibble(res),
+    class = c("epi_binom", "tbl_df", "tbl", "data.frame")
+  )
   return(res)
 }

@@ -47,26 +47,29 @@ epi_2by2 <- function(df,
                      study_type = "cross",
                      outcome_positive = TRUE,
                      exposure_positive = TRUE,
-                     conf_level = 0.95){
-
+                     conf_level = 0.95) {
   outcome <- rlang::enquo(outcome)
   exposure <- rlang::enquo(exposure)
 
-  df <- dplyr::mutate(df, ..outcome = !!outcome)
-  df <- dplyr::mutate(df, ..exposure = !!exposure)
+  df <- dplyr::mutate(df, ..outcome = !! outcome)
+  df <- dplyr::mutate(df, ..exposure = !! exposure)
 
   outcome_vec <- df[["..outcome"]]
   exposure_vec <- df[["..exposure"]]
 
   col_names <- c(rlang::quo_text(outcome), rlang::quo_text(exposure))
 
-  res <- calc_2by2(outcome_vec == outcome_positive,
-                   exposure_vec == exposure_positive,
-                   col_names,
-                   conf_level)
+  res <- calc_2by2(
+    outcome_vec == outcome_positive,
+    exposure_vec == exposure_positive,
+    col_names,
+    conf_level
+  )
 
-  res <- structure(c(res, study_type),
-                   class = "epi_2by2")
+  res <- structure(
+    c(res, study_type),
+    class = "epi_2by2"
+  )
 
   return(res)
 }
@@ -84,23 +87,26 @@ epi_2by2 <- function(df,
 #' @return Returns an epi_2by2 object.
 
 
-calc_2by2 <- function(outcome, exposure, col_names, conf_level){
-
-  tbl <- t(table(outcome,
-                 exposure,
-                 dnn = col_names))
+calc_2by2 <- function(outcome, exposure, col_names, conf_level) {
+  tbl <- t(table(
+    outcome,
+    exposure,
+    dnn = col_names
+  ))
 
   suppressWarnings(chisq <- stats::chisq.test(tbl))
 
-  prev <- stats::binom.test(sum(outcome, na.rm = TRUE),
-                     sum(!is.na(outcome)),
-                     conf.level = conf_level)
+  prev <- stats::binom.test(
+    sum(outcome, na.rm = TRUE),
+    sum(!is.na(outcome)),
+    conf.level = conf_level
+  )
 
-  return(list(table = tbl,
-              expected = chisq[["expected"]],
-              chisq_pvalue = chisq[["p.value"]],
-              prev_all = prev[["estimate"]][[1]],
-              prev_all_ci = prev[["conf.int"]]))
-
+  return(list(
+    table = tbl,
+    expected = chisq[["expected"]],
+    chisq_pvalue = chisq[["p.value"]],
+    prev_all = prev[["estimate"]][[1]],
+    prev_all_ci = prev[["conf.int"]]
+  ))
 }
-

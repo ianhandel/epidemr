@@ -20,38 +20,45 @@
 
 
 epi_inc <- function(df,
-                      event,
-                      time,
-                      conf_level = 0.95,
-                      method = "exact",
-                      digits){
-
+                    event,
+                    time,
+                    conf_level = 0.95,
+                    method = "exact",
+                    digits) {
   event <- rlang::enquo(event)
   time <- rlang::enquo(time)
 
-  df <- dplyr::mutate(df, ..event = !!event)
-  df <- dplyr::mutate(df, ..time = !!time)
+  df <- dplyr::mutate(df, ..event = !! event)
+  df <- dplyr::mutate(df, ..time = !! time)
 
   event_vec <- df[["..event"]]
   time_vec <- df[["..time"]]
 
   col_names <- c(rlang::quo_text(event), rlang::quo_text(time))
 
-  res <- epiR::epi.conf(matrix(c(event_vec, time_vec), ncol = 2),
-                        ctype="inc.rate",
-                        conf.level = conf_level,
-                        method = method)
+  res <- epiR::epi.conf(
+    matrix(c(event_vec, time_vec), ncol = 2),
+    ctype = "inc.rate",
+    conf.level = conf_level,
+    method = method
+  )
 
-  res <- dplyr::mutate(res,
-                       conf_level = conf_level)
+  res <- dplyr::mutate(
+    res,
+    conf_level = conf_level
+  )
 
-  if(!missing(digits)){
-    res <- tibble::as_tibble(purrr::map_if(res,
-                                           purrr::is_bare_numeric,
-                                           round, digits))
+  if (!missing(digits)) {
+    res <- tibble::as_tibble(purrr::map_if(
+      res,
+      purrr::is_bare_numeric,
+      round, digits
+    ))
   }
 
-  res <- structure(tibble::as.tibble(res),
-                   class = c("epi_inc", "tbl_df", "tbl", "data.frame"))
+  res <- structure(
+    tibble::as.tibble(res),
+    class = c("epi_inc", "tbl_df", "tbl", "data.frame")
+  )
   return(res)
 }

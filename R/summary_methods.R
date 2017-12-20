@@ -16,6 +16,6 @@
 #' summary(epi)
 
 
-summary.epi_2by2 <- function(object, ...){
+summary.epi_2by2 <- function(object, ...) {
   purrr::map(object, I)
 }

@@ -12,7 +12,7 @@
 #' print(tab)
 
 
-print.epi_2by2 <- function(x, ...){
+print.epi_2by2 <- function(x, ...) {
   assertthat::assert_that(class(x) == "epi_2by2")
 
   print(x[["table"]])

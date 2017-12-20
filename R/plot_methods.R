@@ -15,9 +15,10 @@
 #' plot(tab)
 
 
-plot.epi_2by2 <- function(x,...){
-  graphics::plot(x[["table"]],
-       main = "",
-       col = viridis::viridis(n = 2, alpha = 0.75, begin = 0.15, end = 0.3))
+plot.epi_2by2 <- function(x, ...) {
+  graphics::plot(
+    x[["table"]],
+    main = "",
+    col = viridis::viridis(n = 2, alpha = 0.75, begin = 0.15, end = 0.3)
+  )
 }
-
