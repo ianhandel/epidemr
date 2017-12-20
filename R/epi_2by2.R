@@ -6,10 +6,12 @@
 #' @param df A dataframe
 #' @param outcome The unquoted column name for outcome.
 #' @param exposure The unquoted column name for exposure
-#' @param study_type The study type "cross", "cohort" or "case-control"
 #' @param outcome_positive The "level" for a positive / of interest outcome
 #' @param exposure_positive The "level" for a positive / of interest exposure
+#' @param method The study type "cross", "cohort" or "case-control"
 #' @param conf_level Probability for confidence interval calculations
+#' @param homogeneity TODO
+#' @param outcome_format TODO
 #' @return Returns an epi_2by2 object.
 #' @export
 #' @examples

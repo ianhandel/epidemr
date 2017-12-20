@@ -2,10 +2,14 @@
 % Please edit documentation in R/epi_2by2.R
 \name{epi_2by2}
 \alias{epi_2by2}
-\title{Two by two table analysis}
+\title{Two by two table analysis
+#'
+Given two columns of a dataframe (and 'positive' levels) generate a 2 x 2
+table and appropriate summary statsitics}
 \usage{
-epi_2by2(df, outcome, exposure, study_type = "cross",
-  outcome_positive = TRUE, exposure_positive = TRUE, conf_level = 0.95)
+epi_2by2(df, outcome, exposure, outcome_positive = TRUE,
+  exposure_positive = TRUE, method = "cohort.count", conf_level = 0.95,
+  homogeneity = "breslow.day", outcome_format = "as.columns")
 }
 \arguments{
 \item{df}{A dataframe}
@@ -14,21 +18,24 @@ epi_2by2(df, outcome, exposure, study_type = "cross",
 
 \item{exposure}{The unquoted column name for exposure}
 
-\item{study_type}{The study type "cross", "cohort" or "case-control"}
-
 \item{outcome_positive}{The "level" for a positive / of interest outcome}
 
 \item{exposure_positive}{The "level" for a positive / of interest exposure}
 
+\item{method}{The study type "cross", "cohort" or "case-control"}
+
 \item{conf_level}{Probability for confidence interval calculations}
+
+\item{homogeneity}{TODO}
+
+\item{outcome_format}{TODO}
 }
 \value{
 Returns an epi_2by2 object.
 }
 \description{
-A technology test rather than a final product
-}
-\details{
+Two by two table analysis
+#'
 Given two columns of a dataframe (and 'positive' levels) generate a 2 x 2
 table and appropriate summary statsitics
 }
