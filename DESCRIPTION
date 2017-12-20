@@ -17,6 +17,7 @@ Imports:
     assertthat,
     binom,
     dplyr,
+    epiR,
     ggplot2,
     graphics,
     purrr,
