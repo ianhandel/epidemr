@@ -40,8 +40,7 @@ result <- dat %>%
   group_by(division, elisa_test) %>%
   nest() %>%
   mutate(result = map(data, ~epi_binom(.x, dichot_result, conf_level = 0.99, method = "exact"))) %>%
-  unnest(result) %>%
-  rename(proportion = mean)
+  unnest(result)
 
 result
 
