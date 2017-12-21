@@ -4,3 +4,7 @@
 
 # epidemr
 A simple, tidy epidemiology package for R
+
+It doesn't do anything clever - just wraps existing epidemilogy functions (from epiR and epitools packages) so they can be called with data frames and unquoted expressions. It also provides 'tidying' functions to convert output to dataframes and simpel plotting methods.
+
+
