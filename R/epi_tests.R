@@ -37,5 +37,5 @@ epi_tests <- function(df,
     TF_to_posneg(df[["..goldstandard.."]])
   )
 
-  epiR::epi.tests(tab)
+  epiR::epi.tests(tab, conf.level = conf_level)
 }
