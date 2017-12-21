@@ -24,5 +24,5 @@ unquoted columns or expressions.
 }
 \examples{
 head(mtcars)
-epi_tests(mtcars, am==1, cyl==4, conf_level = 0.95)
+epi_tests(mtcars, mpg < 25, cyl > 4, conf_level = 0.95)
 }

@@ -11,7 +11,7 @@
 #' @export
 #' @examples
 #' head(mtcars)
-#' epi_tests(mtcars, am==1, cyl==4, conf_level = 0.95)
+#' epi_tests(mtcars, mpg < 25, cyl > 4, conf_level = 0.95)
 
 
 epi_tests <- function(df,
@@ -27,14 +27,18 @@ epi_tests <- function(df,
     ..goldstandard.. = !! goldstandard
   )
 
-  assertthat::assert_that(is.logical(df[["..test.."]]),
-                          msg = "Test must be TRUE/FALSE")
-  assertthat::assert_that(is.logical(df[["..goldstandard.."]]),
-                          msg = ".Goldstandard must be TRUE/FALSE")
+  assertthat::assert_that(
+    is.logical(df[["..test.."]]),
+    msg = "Test must be TRUE/FALSE"
+  )
+  assertthat::assert_that(
+    is.logical(df[["..goldstandard.."]]),
+    msg = ".Goldstandard must be TRUE/FALSE"
+  )
 
   tab <- table(
-    TF_to_posneg(df[["..test.."]]),
-    TF_to_posneg(df[["..goldstandard.."]])
+    TF_to_posneg(df[["..goldstandard.."]]),
+    TF_to_posneg(df[["..test.."]])
   )
 
   epiR::epi.tests(tab, conf.level = conf_level)
