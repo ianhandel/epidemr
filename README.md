@@ -10,5 +10,5 @@ It doesn't do anything clever - just wraps existing epidemiology functions (from
 It also provides 'tidying' functions to convert output to dataframes and provides simple plotting methods.
 
 ## Functions so far...
-* epi_tests - evaluation of diagnostic test vs a gold standard
-* epi_binom - estimate proportions with binomial confidence intervals 
+* __epi_tests__ - evaluation of diagnostic test vs a gold standard
+* __epi_binom__ - estimate proportions with binomial confidence intervals 
