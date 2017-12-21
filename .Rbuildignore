@@ -2,5 +2,6 @@
 ^\.Rproj\.user$
 ^\.travis\.yml$
 ^demo_stuff$
+^specification$
 ^appveyor\.yml$
 ^codecov\.yml$
