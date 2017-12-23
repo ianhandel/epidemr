@@ -4,10 +4,10 @@
 \alias{epi_tests}
 \title{Wrap data from a dataframe and send to epiR::epi.tests}
 \usage{
-epi_tests(df, test, goldstandard, conf_level = 0.95)
+epi_tests(x, test = NULL, goldstandard = NULL, conf_level = 0.95)
 }
 \arguments{
-\item{df}{A dataframe}
+\item{x}{A dataframe or epi_two_by_two object}
 
 \item{test}{The unquoted column name for test results}
 
@@ -19,8 +19,8 @@ epi_tests(df, test, goldstandard, conf_level = 0.95)
 Returns an epi.tests
 }
 \description{
-A wrapper for epirR::epi.tests  called with a data.frame and
-unquoted columns or expressions.
+A wrapper for epirR::epi.tests normally called with a data.frame and
+unquoted columns or expressions. Can also be called with an epi_twobytwo object (generated with twobytwo helper function) to allow direct entry of a table of results.
 }
 \examples{
 head(mtcars)
