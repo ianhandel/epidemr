@@ -7,7 +7,7 @@
 epi_tests(x, test = NULL, goldstandard = NULL, conf_level = 0.95)
 }
 \arguments{
-\item{x}{A dataframe or epi_two_by_two object}
+\item{x}{A dataframe or numeric vector length 4}
 
 \item{test}{The unquoted column name for test results}
 
@@ -20,7 +20,7 @@ Returns an epi.tests
 }
 \description{
 A wrapper for epirR::epi.tests normally called with a data.frame and
-unquoted columns or expressions. Can also be called with an epi_twobytwo object (generated with twobytwo helper function) to allow direct entry of a table of results.
+unquoted columns or expressions. Can also be called with a numeric vector length 4 to allow direct entry of 2 x 2 table data
 }
 \examples{
 head(mtcars)
