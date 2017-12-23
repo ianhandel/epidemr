@@ -19,7 +19,12 @@ epi_tests <- function(x,
                       goldstandard = NULL,
                       conf_level = 0.95) {
 
-  if (class(x) == "epi_twobytwo"){
+  assertthat::assert_that(any(class(x) %in% c("data.frame",
+                                              "tbl",
+                                              "epi_twobytwo")),
+                          msg = "x must be a dataframe or epi_twobytwo object")
+
+  if ("epi_twobytwo" %in% class(x)){
     return(epiR::epi.tests(as.matrix(with(x, c(TP, FN, FP, TN)),
                                      conf.level = conf_level)))
   }
