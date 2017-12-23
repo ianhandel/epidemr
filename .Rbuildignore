@@ -5,3 +5,4 @@
 ^specification$
 ^appveyor\.yml$
 ^codecov\.yml$
+^LICENSE\.md$
