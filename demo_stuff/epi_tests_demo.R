@@ -8,3 +8,5 @@ epi_tests(mtcars, am == 1, cyl == 4)
 
 epi_tests(c(8, 5, 3, 16))
 
+epi_tests(table(mtcars$am==1, mtcars$cyl ==4))
+

@@ -6,27 +6,27 @@
 #' @param x A dataframe or numeric vector length 4
 #' @param test The unquoted column name for test results
 #' @param goldstandard The unquoted column name for gold standard test results
-#' @param conf_level Probability for confidence interval calculations
+#' @param ... Other parameters passed on to epiR::epi.tests
 #' @return Returns an epi.tests
 #' @export
 #' @examples
 #' head(mtcars)
-#' epi_tests(mtcars, mpg < 25, cyl > 4, conf_level = 0.95)
+#' epi_tests(mtcars, mpg < 25, cyl > 4, conf.level = 0.95)
 
 
 epi_tests <- function(x,
                       test = NULL,
                       goldstandard = NULL,
-                      conf_level = 0.95) {
+                      ...) {
 
   assertthat::assert_that(any(class(x) %in% c("data.frame",
                                               "tbl") |
-                                class(x) == "numeric" & length(x) == 4),
-                          msg = "x must be a dataframe or numeric vector length 4")
+                                class(x) == "numeric" & length(x) == 4 |
+                                class(x) == "table"),
+                          msg = "x must be a dataframe, table or numeric vector length 4")
 
-  if (class(x) == "numeric"){
-    return(epiR::epi.tests(as.matrix(x, 2, 2),
-                                     conf.level = conf_level))
+  if (class(x) == "numeric" | class(x) == "table"){
+    return(epiR::epi.tests(as.matrix(x, 2, 2), ...))
   }
 
   df <- x
@@ -54,7 +54,7 @@ epi_tests <- function(x,
     TF_to_posneg(df[["..test.."]])
   )
 
-  epiR::epi.tests(tab, conf.level = conf_level)
+  epiR::epi.tests(tab, ...)
 }
 
 

@@ -4,7 +4,7 @@
 \alias{epi_tests}
 \title{Wrap data from a dataframe and send to epiR::epi.tests}
 \usage{
-epi_tests(x, test = NULL, goldstandard = NULL, conf_level = 0.95)
+epi_tests(x, test = NULL, goldstandard = NULL, ...)
 }
 \arguments{
 \item{x}{A dataframe or numeric vector length 4}
@@ -13,7 +13,7 @@ epi_tests(x, test = NULL, goldstandard = NULL, conf_level = 0.95)
 
 \item{goldstandard}{The unquoted column name for gold standard test results}
 
-\item{conf_level}{Probability for confidence interval calculations}
+\item{...}{Other parameters passed on to epiR::epi.tests}
 }
 \value{
 Returns an epi.tests
@@ -24,5 +24,5 @@ unquoted columns or expressions. Can also be called with a numeric vector length
 }
 \examples{
 head(mtcars)
-epi_tests(mtcars, mpg < 25, cyl > 4, conf_level = 0.95)
+epi_tests(mtcars, mpg < 25, cyl > 4, conf.level = 0.95)
 }
