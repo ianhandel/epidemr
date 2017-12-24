@@ -57,4 +57,19 @@ epi_tests <- function(x,
   epiR::epi.tests(tab, ...)
 }
 
+#' Tidy the output from epiR::epi.tests into a tibble
+#'
+#'
+#' @param x An epi.tests object
+#' @param ... other arguments - ignored
+#' @return Returns atibble
+#' @export
+#' @examples
+#' head(mtcars)
+#' res <- epi_tests(mtcars, mpg < 25, cyl > 4, conf.level = 0.95)
+#' tidy(res)
 
+tidy.epi.tests <- function(x, ...){
+  res <- dplyr::bind_rows(x$rval, .id = "variable")
+  dplyr::mutate(res, conf.level = x$conf.level)
+}
