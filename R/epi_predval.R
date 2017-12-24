@@ -12,19 +12,21 @@
 #' res <- epi_tests(mtcars, mpg < 25, cyl > 4, conf.level = 0.95)
 #' epi_predval(res)
 
-epi_predval <-function(x = NULL, se = NULL, sp = NULL,
+epi_predval <-function(X, Y = NULL,
                        prevalences = seq(0, 1, 0.05)){
 
-  if(class(x) == "epi.tests"){
-    se <- x$rval$se$est
+  if(class(X) == "epi.tests"){
+    se <- X$rval$se$est
+    sp <- X$rval$sp$est
   }else{
-    if(is.null(se)) se  <- x
+    se  <- X
+    sp <- Y
   }
   p <- prevalences
 
   ppv <- (se * p) / ((se * p) + ((1 - sp) * (1 - p)))
   npv <- sp * (1 - p) / ((sp * (1 - p) + (1 - se) * p))
 
-  structure(tibble::tibble(prev = p, ppv, npv),
+  structure(tibble::tibble(se, sp, prev = p, ppv, npv),
             class = c("epi_predval", class(tibble::tibble())))
 }
