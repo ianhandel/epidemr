@@ -10,7 +10,7 @@ epi_predval(X = NULL, Y = NULL, se = NULL, sp = NULL,
 \arguments{
 \item{X}{An epiR::epi.tests object or test sensitivity}
 
-\item{Y}{Test specificity if not explicitly assigned to sp@param}
+\item{Y}{Test specificity if not explicitly assigned to sp}
 
 \item{se}{optionally test sensitivity}
 

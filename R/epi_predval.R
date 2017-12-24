@@ -3,7 +3,7 @@
 
 #'
 #' @param X An epiR::epi.tests object or test sensitivity
-#' @param Y Test specificity if not explicitly assigned to sp@param
+#' @param Y Test specificity if not explicitly assigned to sp
 #' @param se optionally test sensitivity
 #' @param sp optionally test specificituy
 #' @param prevalences vector of prevalences to calculate npv and ppv at
