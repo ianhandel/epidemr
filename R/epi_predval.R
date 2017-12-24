@@ -15,7 +15,7 @@
 #' epi_predval(res)
 
 epi_predval <-function(X = NULL, Y = NULL, se = NULL, sp = NULL,
-                       prevalences = seq(0, 1, 0.05)){
+                       prevalences = seq(0, 1, 0.01)){
 
   if(class(X) == "epi.tests"){
     se <- X$rval$se$est
@@ -36,4 +36,28 @@ epi_predval <-function(X = NULL, Y = NULL, se = NULL, sp = NULL,
 
   structure(tibble::tibble(se, sp, prev = p, ppv, npv),
             class = c("epi_predval", class(tibble::tibble())))
+}
+
+
+
+#' Default plotting of a epi_predval object
+#'
+#' @param x An epi_predval object to plot
+#' @param y ignored
+#' @param ... ignored
+#' @return ggplot object
+#' @export
+#' @examples
+#' pv <- epi_predval(se = 0.90, sp = 0.99)
+#' plot(pv)
+
+
+
+plot.epi_predval <- function(x, y = NULL, ...){
+  ggplot2::ggplot(x, ggplot2::aes_(x = ~prev)) +
+    ggplot2::geom_line(ggplot2::aes_(y = ~ppv, colour = "positive")) +
+    ggplot2::geom_line(ggplot2::aes_(y = ~npv, colour = "negative")) +
+    ggplot2::labs(x = "Prevalence",
+         y = "Predicitive value",
+         colour = "")
 }
