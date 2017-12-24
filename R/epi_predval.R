@@ -2,8 +2,10 @@
 #'
 
 #'
-#' @param x An epiR::epi.tests object or test sensitivity
-#' @param sp test specicifity if x is sensitivity
+#' @param X An epiR::epi.tests object or test sensitivity
+#' @param Y Test specificity if not explicitly assigned to sp@param
+#' @param se optionally test sensitivity
+#' @param sp optionally test specificituy
 #' @param prevalences vector of prevalences to calculate npv and ppv at
 #' @return Returns an epi_predval object
 #' @export
@@ -12,15 +14,20 @@
 #' res <- epi_tests(mtcars, mpg < 25, cyl > 4, conf.level = 0.95)
 #' epi_predval(res)
 
-epi_predval <-function(X, Y = NULL,
+epi_predval <-function(X = NULL, Y = NULL, se = NULL, sp = NULL,
                        prevalences = seq(0, 1, 0.05)){
 
   if(class(X) == "epi.tests"){
     se <- X$rval$se$est
     sp <- X$rval$sp$est
   }else{
-    se  <- X
-    sp <- Y
+    if(!is.null(se) & !is.null(sp)){
+      se <- se
+      sp <- sp
+    }else{
+      se <- X
+      sp <- Y
+    }
   }
   p <- prevalences
 

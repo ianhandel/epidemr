@@ -2,5 +2,6 @@
 
 S3method(tidy,epi.tests)
 export(epi_binom)
+export(epi_predval)
 export(epi_tests)
 export(tidy)
