@@ -3,7 +3,7 @@
 [![Coverage Status](https://img.shields.io/codecov/c/github/ianhandel/epidemr/master.svg)](https://codecov.io/github/ianhandel/epidemr?branch=master)
 
 # epidemr
-A simple, tidy epidemiology package for R
+A simple, sometimes tidy, epidemiology package for R
 
 It doesn't do anything clever - just wraps existing epidemiology functions (from epiR, binom and epitools packages) so they can be called with data frames and unquoted expressions.
 
