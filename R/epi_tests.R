@@ -89,7 +89,7 @@ tidy.epi.tests <- function(x, ...){
 plot.epi.tests <- function(x, ...){
 
   df <- dplyr::bind_rows(x$rval[c("se","sp")], .id = "parameter")
-  ggplot2::ggplot(df, ggplot2::aes_(x = ~parameter,
+  g <- ggplot2::ggplot(df, ggplot2::aes_(x = ~parameter,
                                   y = ~est,
                                   ymin = ~lower,
                                   ymax = ~upper)) +
@@ -99,6 +99,7 @@ plot.epi.tests <- function(x, ...){
                   y = "Estimate",
                   caption = paste0(x$conf.level * 100, "% CI")) +
     ggplot2::ylim(c(0,1))
+  g
 }
 
 
