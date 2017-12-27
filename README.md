@@ -12,6 +12,6 @@ It also provides 'tidying' functions to convert output to dataframes and provide
 ## Currently in development - so don't use it for serious work!
 
 ## But functions so far...
-* __epi_tests__ - evaluation of diagnostic test vs a gold standard
+* __epi_tests__ - evaluation of diagnostic test vs a gold standard (also adds plot(...) method)
 * __epi_binom__ - estimate proportions with binomial confidence intervals 
 * __epi_predval__ - calculate positive and negative predictive values (also adds plot(...) method)
