@@ -12,6 +12,11 @@ It also provides 'tidying' functions to convert output to dataframes and provide
 ## Currently in development - so don't use it for serious work!
 
 ## But functions so far...
+
+(Although epi_tests and epi_2by2 may be removed and this package just provide epi_tables helper for epiR functions)
+
 * __epi_tests__ - evaluation of diagnostic test vs a gold standard (also adds plot(...) method)
 * __epi_binom__ - estimate proportions with binomial confidence intervals 
 * __epi_predval__ - calculate positive and negative predictive values (also adds plot(...) method)
+* __epi_table__ - make an outcome / exposure 2x2 table from dataframe and expressions
+* __epi_2by2__ - preliminary wrapper for epi.2by2 that takes dataframe and expressions, or tables
