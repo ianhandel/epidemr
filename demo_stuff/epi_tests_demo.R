@@ -13,3 +13,5 @@ res <- epi_tests(c(8, 5, 3, 16))
 print(res) # uses epiR::print.epi.tests() method
 
 tidy(res) # uses epidemr::tidy.epi.tests() method
+
+plot(res) # uses epidemr::plot.epi.tests() method
