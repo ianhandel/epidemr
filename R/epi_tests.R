@@ -62,7 +62,7 @@ epi_tests <- function(x,
 #'
 #' @param x An epi.tests object
 #' @param ... other arguments - ignored
-#' @return Returns atibble
+#' @return Returns a tibble
 #' @export
 #' @examples
 #' head(mtcars)
@@ -73,3 +73,33 @@ tidy.epi.tests <- function(x, ...){
   res <- dplyr::bind_rows(x$rval, .id = "variable")
   dplyr::mutate(res, conf.level = x$conf.level)
 }
+
+#' Plot the output from epiR::epi.tests
+#'
+#'
+#' @param x An epi.tests object
+#' @param ... other arguments - ignored
+#' @return Returns a ggplot
+#' @export
+#' @examples
+#' head(mtcars)
+#' res <- epi_tests(mtcars, am == 1, cyl == 4, conf.level = 0.95)
+#' plot(res)
+
+plot.epi.tests <- function(x, ...){
+
+  df <- dplyr::bind_rows(x$rval[c("se","sp")], .id = "parameter")
+  ggplot2::ggplot(df, ggplot2::aes_(x = ~parameter,
+                                  y = ~est,
+                                  ymin = ~lower,
+                                  ymax = ~upper)) +
+    ggplot2::geom_errorbar(width = 0.1) +
+    ggplot2::geom_point() +
+    ggplot2::labs(x = "Parameter",
+                  y = "Estimate",
+                  caption = paste0(x$conf.level * 100, "% CI")) +
+    ggplot2::ylim(c(0,1))
+}
+
+
+

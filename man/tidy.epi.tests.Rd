@@ -12,7 +12,7 @@
 \item{...}{other arguments - ignored}
 }
 \value{
-Returns atibble
+Returns a tibble
 }
 \description{
 Tidy the output from epiR::epi.tests into a tibble
