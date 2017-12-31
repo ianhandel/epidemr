@@ -2,6 +2,7 @@
 
 S3method(plot,epi.tests)
 S3method(plot,epi_predval)
+S3method(tidy,epi.2by2)
 S3method(tidy,epi.tests)
 export(epi_2by2)
 export(epi_binom)

@@ -57,3 +57,25 @@ epi_2by2 <- function(x,
 
   epiR::epi.2by2(tab, ...)
 }
+
+
+#' Tidy epi.2by2 output to give data.frame of estimates and CI
+#'
+#' @param x An epi.2by2 object
+#' @param ... other arguments (ignored)
+#' @export
+#' @example res <- epi_2by2(mtcars, am == 1, cyl == 4, conf.level = 0.95)
+#' @example tidy(res)
+
+
+tidy.epi.2by2 <- function(x, ...){
+  assertthat::assert_that(class(x) == "epi.2by2",
+                          msg = "x must be an epi.2by2 object")
+  res <- x[["res"]]
+
+  res <- purrr::keep(res, ~identical(names(.x), c("est", "lower", "upper")))
+
+  res <- dplyr::bind_rows(res, .id = "variable")
+
+  dplyr::mutate(res, conf.level = x$conf.level)
+}
