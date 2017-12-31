@@ -3,15 +3,15 @@
 [![Coverage Status](https://img.shields.io/codecov/c/github/ianhandel/epidemr/master.svg)](https://codecov.io/github/ianhandel/epidemr?branch=master)
 
 # epidemr
-A simple, sometimes tidy, epidemiology package for R
+A package of simple, sometimes tidy, wrappers and helpers for epidemiology with R
 
 It doesn't do anything clever - just wraps existing epidemiology functions (from epiR, binom and epitools packages) so they can be called with data frames and unquoted expressions.
 
 It also provides 'tidying' functions to convert output to dataframes and provides simple plotting methods.
 
-## Currently in development - so don't use it for serious work!
+## Currently in development - so don't use it!
 
-## But functions so far...
+## But functions in draft so far...
 
 (Although epi_tests and epi_2by2 may be removed and this package just provide epi_tables helper for epiR functions)
 
