@@ -6,9 +6,8 @@
 #' Given a column of a dataframe (and 'positive' level) generate a
 #' binomial proportion estimate and confidence intervals
 #'
-#' @param df A dataframe
-#' @param var The unquoted column name for variable
-#' @param var_positive The "level" for a positive / of interest outcome
+#' @param x A dataframe or number of sucesses
+#' @param y An expression evaluating to TRUE/FALSE or number of trials
 #' @param conf_level Probability for confidence interval calculations
 #' @param methods Confidence interval method see ?binom::binom.confint
 #' @param digits Rounding digits
@@ -17,30 +16,40 @@
 #' @export
 #' @examples
 #' head(mtcars)
-#' epi_binom(mtcars, cyl, 4, conf_level = 0.95, methods = "all")
+#' epi_binom(mtcars, cyl==4, conf_level = 0.95, methods = "all")
+#' epi_binom(7, 10, conf_level = 0.95, methods = "all")
 
 
-epi_binom <- function(df,
-                      var,
-                      var_positive = TRUE,
+epi_binom <- function(x,
+                      y,
                       conf_level = 0.95,
                       methods = "all",
                       digits,
                       ...){
 
-  var <- rlang::enquo(var)
 
-  df <- dplyr::mutate(df, ..var = !!var)
+  if(length(x) == 1  & !is.list(x)){
+    res <- binom::binom.confint(x = x,
+                                n = y,
+                                conf.level = conf_level,
+                                methods = methods,
+                                ...)
+  }else{
 
-  var_vec <- df[["..var"]]
+  var <- rlang::enquo(y)
+
+  x <- dplyr::mutate(x, ..var = !!var)
+
+  var_vec <- x[["..var"]]
 
   col_name <- rlang::quo_text(var)
 
-  res <- binom::binom.confint(x = sum(var_vec == var_positive),
+  res <- binom::binom.confint(x = sum(var_vec),
                               n = sum(!is.na(var_vec)),
                               conf.level = conf_level,
                               methods = methods,
                               ...)
+  }
   # add conf_level as variable
   res <- dplyr::mutate(res,
                        conf_level = conf_level)

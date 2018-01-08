@@ -4,15 +4,12 @@
 \alias{epi_binom}
 \title{Binomial estimates from dataframe column}
 \usage{
-epi_binom(df, var, var_positive = TRUE, conf_level = 0.95,
-  methods = "all", digits, ...)
+epi_binom(x, y, conf_level = 0.95, methods = "all", digits, ...)
 }
 \arguments{
-\item{df}{A dataframe}
+\item{x}{A dataframe or number of sucesses}
 
-\item{var}{The unquoted column name for variable}
-
-\item{var_positive}{The "level" for a positive / of interest outcome}
+\item{y}{An expression evaluating to TRUE/FALSE or number of trials}
 
 \item{conf_level}{Probability for confidence interval calculations}
 
@@ -35,5 +32,6 @@ binomial proportion estimate and confidence intervals
 }
 \examples{
 head(mtcars)
-epi_binom(mtcars, cyl, 4, conf_level = 0.95, methods = "all")
+epi_binom(mtcars, cyl==4, conf_level = 0.95, methods = "all")
+epi_binom(7, 10, conf_level = 0.95, methods = "all")
 }
