@@ -51,8 +51,8 @@ epi_2by2 <- function(x,
   )
 
   tab <- table(
-    TF_to_posneg(df[["..outcome.."]]),
-    TF_to_posneg(df[["..exposure.."]])
+    TF_to_posneg(df[["..exposure.."]]),
+    TF_to_posneg(df[["..outcome.."]])
   )
 
   epiR::epi.2by2(tab, ...)
