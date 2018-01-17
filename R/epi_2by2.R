@@ -34,6 +34,11 @@ epi_2by2 <- function(x,
                       method = "cross.sectional",
                       ...) {
 
+  # sileces R CMD checks
+  ..outcome.. <- NULL
+  ..exposure.. <- NULL
+  ..time_at_risk.. <- NULL
+
   assertthat::assert_that(any(class(x) %in% c("data.frame",
                                               "tbl") |
                                 class(x) == "numeric" & length(x) == 4 |

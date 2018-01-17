@@ -4,8 +4,8 @@
 \alias{epi_2by2}
 \title{Wrap data from a dataframe and send to epiR::epi.2by2 (or pass through table)}
 \usage{
-epi_2by2(x, outcome = NULL, exposure = NULL, time_at_risk = NULL, method,
-  ...)
+epi_2by2(x, outcome = NULL, exposure = NULL, time_at_risk = NULL,
+  method = "cross.sectional", ...)
 }
 \arguments{
 \item{x}{A dataframe or numeric vector length 4}
