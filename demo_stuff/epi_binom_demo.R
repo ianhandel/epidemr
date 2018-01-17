@@ -1,5 +1,5 @@
 library(tidyverse)
-# devtools::install_github("ianhandel/epidemr")
+devtools::install_github("ianhandel/epidemr")
 library(epidemr)
 
 head(mpg)
