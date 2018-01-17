@@ -31,7 +31,7 @@ epi_2by2 <- function(x,
                       outcome = NULL,
                       exposure = NULL,
                       time_at_risk = NULL,
-                      method = "cross.sectional",
+                      method,
                       ...) {
 
   assertthat::assert_that(any(class(x) %in% c("data.frame",
@@ -84,7 +84,7 @@ epi_2by2 <- function(x,
     TF_to_posneg(df[["..outcome.."]])
   )
 
-  epiR::epi.2by2(tab, ...)
+  epiR::epi.2by2(tab, method = method, ...)
   }
 }
 
