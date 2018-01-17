@@ -62,11 +62,12 @@ epi_tests <- function(x,
   )
 
   tab <- table(
-    TF_to_posneg(df[["..goldstandard.."]]),
-    TF_to_posneg(df[["..test.."]])
+    TF_to_posneg(df[["..test.."]]),
+    TF_to_posneg(df[["..goldstandard.."]])
   )
 
   epiR::epi.tests(tab, ...)
+  tab
 }
 
 #' Tidy the output from epiR::epi.tests into a tibble
