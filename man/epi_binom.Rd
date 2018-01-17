@@ -21,6 +21,11 @@ epi_binom(x, y, conf_level = 0.95, methods = "all", digits, ...)
 }
 \value{
 Returns an epi_binom object - this includes a variable for conf_level.
+
+\if{html}{
+\out{
+ <img src = "https://media.giphy.com/media/IB9foBA4PVkKA/giphy.gif">
+}}
 }
 \description{
 A wrapper for binom::binom.confint  called with a data.frame and

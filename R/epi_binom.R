@@ -13,11 +13,19 @@
 #' @param digits Rounding digits
 #' @param ... Additional arguments for binom::binom.confint "bayes" method
 #' @return Returns an epi_binom object - this includes a variable for conf_level.
+#'
+#' \if{html}{
+#' \out{
+#'  <img src = "https://media.giphy.com/media/IB9foBA4PVkKA/giphy.gif">
+#' }}
+#'
+#'
 #' @export
 #' @examples
 #' head(mtcars)
 #' epi_binom(mtcars, cyl==4, conf_level = 0.95, methods = "all")
 #' epi_binom(7, 10, conf_level = 0.95, methods = "all")
+
 
 
 epi_binom <- function(x,
