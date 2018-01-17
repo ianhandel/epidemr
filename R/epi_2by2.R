@@ -37,7 +37,7 @@ epi_2by2 <- function(x,
                                 class(x) == "matrix"),
                           msg = "x must be a dataframe, table or numeric vector length 4")
 
-  if (class(x) == "numeric" | class(x) == "table" | class(x) == "matrix"){
+  if (!"data.frame" %in% class(x)){
     return(epiR::epi.2by2(matrix(x, 2, 2, byrow = TRUE), ...))
   }
 
