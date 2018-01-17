@@ -7,6 +7,7 @@
 #' @param outcome The unquoted column name for test results
 #' @param exposure The unquoted column name for exposure column
 #' @param method The type of study
+#' @param time_at_risk  Time at risk for cohort.time method
 #' @param ... Other parameters passed on to epiR::epi.2by2
 #' @return Returns an epi.2by2 object
 #' @details If using 4 numbers epi_2by2(a, b, c, d, ...)

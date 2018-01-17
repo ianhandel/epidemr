@@ -4,7 +4,8 @@
 \alias{epi_2by2}
 \title{Wrap data from a dataframe and send to epiR::epi.2by2 (or pass through table)}
 \usage{
-epi_2by2(x, outcome = NULL, exposure = NULL, ...)
+epi_2by2(x, outcome = NULL, exposure = NULL, time_at_risk = NULL,
+  method = "cross.sectional", ...)
 }
 \arguments{
 \item{x}{A dataframe or numeric vector length 4}
@@ -12,6 +13,10 @@ epi_2by2(x, outcome = NULL, exposure = NULL, ...)
 \item{outcome}{The unquoted column name for test results}
 
 \item{exposure}{The unquoted column name for exposure column}
+
+\item{time_at_risk}{Time at risk for cohort.time method}
+
+\item{method}{The type of study}
 
 \item{...}{Other parameters passed on to epiR::epi.2by2}
 }
