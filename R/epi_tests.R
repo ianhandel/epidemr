@@ -67,7 +67,6 @@ epi_tests <- function(x,
   )
 
   epiR::epi.tests(tab, ...)
-  tab
 }
 
 #' Tidy the output from epiR::epi.tests into a tibble
