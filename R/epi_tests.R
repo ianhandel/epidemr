@@ -38,7 +38,7 @@ epi_tests <- function(x,
                           msg = "x must be a dataframe, table or numeric vector length 4")
 
   if (class(x) == "numeric" | class(x) == "table"){
-    return(epiR::epi.tests(matrix(x, 2, 2), ...))
+    return(epiR::epi.tests(matrix(x, 2, 2, byrow = TRUE), ...))
   }
 
   df <- x
