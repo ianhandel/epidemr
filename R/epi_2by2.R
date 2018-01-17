@@ -31,7 +31,7 @@ epi_2by2 <- function(x,
                       outcome = NULL,
                       exposure = NULL,
                       time_at_risk = NULL,
-                      method,
+                      method = "cross.sectional",
                       ...) {
 
   assertthat::assert_that(any(class(x) %in% c("data.frame",

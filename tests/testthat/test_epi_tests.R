@@ -13,7 +13,7 @@ res <- epi_tests(df, gold == 1, test == 1)$tab
 
 test_that("returns correct table", {
   expect_equal(trimws(res[1, 1]), I("3"))
-  expect_equal(trimws(res[1, 2]), I("1"))
-  expect_equal(trimws(res[2, 1]), I("0"))
+  expect_equal(trimws(res[1, 2]), I("0"))
+  expect_equal(trimws(res[2, 1]), I("1"))
   expect_equal(trimws(res[2, 2]), I("6"))
 })
