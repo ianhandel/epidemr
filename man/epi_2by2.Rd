@@ -25,4 +25,5 @@ unquoted columns or expressions. Can also be called with a numeric vector length
 \examples{
 head(mtcars)
 epi_2by2(mtcars, am == 1, cyl == 4, conf.level = 0.95)
+epi_2by2(c(12, 34, 1, 6), conf.level = 0.95)
 }

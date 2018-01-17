@@ -15,6 +15,8 @@ epi_inc(x, y, z = NULL, conf_level = 0.95, methods = "exact", ...)
 
 \item{conf_level}{confidence level for estimates}
 
+\item{methods}{estimation methods for CI to be passes to epiR::epi_conf}
+
 \item{...}{Other parameters passed on to epiR::epi.conf}
 }
 \value{

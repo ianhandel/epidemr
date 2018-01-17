@@ -8,7 +8,7 @@
 #' @param y See details
 #' @param z See details
 #' @param conf_level confidence level for estimates
-#' @methods estimation methods for CI to be passes to epiR::epi_conf
+#' @param methods estimation methods for CI to be passes to epiR::epi_conf
 #' @param ... Other parameters passed on to epiR::epi.conf
 #' @return Returns a tibble
 #' @details If used with a dataframe use epi_inc(dataframe, cases-expression, time_at_risk-column, ...)
