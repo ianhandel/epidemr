@@ -22,6 +22,27 @@ Returns an epi.2by2 object
 A wrapper for epirR::epi.2by2 normally called with a data.frame and
 unquoted columns or expressions. Can also be called with a numeric vector length 4 to allow direct entry of 2 x 2 table data
 }
+\details{
+If using 4 numbers epi_2by2(a, b, c, d, ...)
+
+Format is:
+
+-----------	----------	-------------
+
+Disease   +	          - or time at risk
+
+-----------	----------	-------------
+
+Expose +	a            b
+
+Expose -	c            d
+
+-----------	----------	-------------
+
+Total	    a + c	      b + d
+
+-----------	----------	-------------
+}
 \examples{
 head(mtcars)
 epi_2by2(mtcars, am == 1, cyl == 4, conf.level = 0.95)

@@ -8,6 +8,16 @@
 #' @param exposure The unquoted column name for exposure column
 #' @param ... Other parameters passed on to epiR::epi.2by2
 #' @return Returns an epi.2by2 object
+#' @details If using 4 numbers epi_2by2(a, b, c, d, ...)
+#' @details Format is:
+#' @details -----------	----------	-------------
+#' @details   Disease   +	          - or time at risk
+#' @details -----------	----------	-------------
+#' @details   Expose +	a            b
+#' @details   Expose -	c            d
+#' @details -----------	----------	-------------
+#' @details   Total	    a + c	      b + d
+#' @details -----------	----------	-------------
 #' @export
 #' @examples
 #' head(mtcars)
@@ -28,7 +38,7 @@ epi_2by2 <- function(x,
                           msg = "x must be a dataframe, table or numeric vector length 4")
 
   if (class(x) == "numeric" | class(x) == "table" | class(x) == "matrix"){
-    return(epiR::epi.2by2(matrix(x, 2, 2), ...))
+    return(epiR::epi.2by2(matrix(x, 2, 2, byrow = TRUE), ...))
   }
 
   df <- x

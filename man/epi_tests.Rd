@@ -22,7 +22,29 @@ Returns an epi.tests
 A wrapper for epirR::epi.tests normally called with a data.frame and
 unquoted columns or expressions. Can also be called with a numeric vector length 4 to allow direct entry of 2 x 2 table data
 }
+\details{
+If using 4 numbers epi_test(c(a, b, c, d), ...)
+
+Format is:
+
+-----------	----------	-------------
+
+Disease   +	          - or time at risk
+
+-----------	----------	-------------
+
+Test +     a            b
+
+Test -	    c            d
+
+-----------	----------	-------------
+
+Total	    a + c	      b + d
+
+-----------	----------	-------------
+}
 \examples{
 head(mtcars)
 epi_tests(mtcars, mpg < 25, cyl > 4, conf.level = 0.95)
+res <- epi_tests(c(80, 1, 20, 99), conf.level = 0.95)
 }

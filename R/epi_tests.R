@@ -8,10 +8,22 @@
 #' @param goldstandard The unquoted column name for gold standard test results
 #' @param ... Other parameters passed on to epiR::epi.tests
 #' @return Returns an epi.tests
+#' @details If using 4 numbers epi_test(c(a, b, c, d), ...)
+#' @details Format is:
+#' @details -----------	----------	-------------
+#' @details   Disease   +	          - or time at risk
+#' @details -----------	----------	-------------
+#' @details  Test +     a            b
+#' @details  Test -	    c            d
+#' @details -----------	----------	-------------
+#' @details   Total	    a + c	      b + d
+#' @details -----------	----------	-------------
 #' @export
 #' @examples
 #' head(mtcars)
 #' epi_tests(mtcars, mpg < 25, cyl > 4, conf.level = 0.95)
+#' res <- epi_tests(c(80, 1, 20, 99), conf.level = 0.95)
+
 
 
 epi_tests <- function(x,

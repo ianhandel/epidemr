@@ -34,7 +34,7 @@ If used with summary data use epi_inc(number-of-cases, time-at-risk, ...)
 \examples{
 head(mtcars)
 # using a dataframe...
-epi_conf(mtcars, cyl == 4, disp, conf_level = 0.95)
+epi_inc(mtcars, cyl == 4, disp, conf_level = 0.95)
 # using summary data
-epi_conf(70, 1010, conf_level = 0.95)
+epi_inc(70, 1010, conf_level = 0.95)
 }
