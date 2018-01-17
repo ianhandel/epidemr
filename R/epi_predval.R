@@ -59,5 +59,5 @@ plot.epi_predval <- function(x, y = NULL, ...){
     ggplot2::geom_line(ggplot2::aes_(y = ~npv, colour = "negative")) +
     ggplot2::labs(x = "Prevalence",
          y = "Predicitive value",
-         colour = "Test result")
+         colour = "Predicitive \nvalue")
 }
