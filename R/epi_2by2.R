@@ -6,6 +6,7 @@
 #' @param x A dataframe or numeric vector length 4
 #' @param outcome The unquoted column name for test results
 #' @param exposure The unquoted column name for exposure column
+#' @param method The type of study
 #' @param ... Other parameters passed on to epiR::epi.2by2
 #' @return Returns an epi.2by2 object
 #' @details If using 4 numbers epi_2by2(a, b, c, d, ...)
@@ -28,6 +29,8 @@
 epi_2by2 <- function(x,
                       outcome = NULL,
                       exposure = NULL,
+                      time_at_risk = NULL,
+                      method = "cross.sectional",
                       ...) {
 
   assertthat::assert_that(any(class(x) %in% c("data.frame",
@@ -38,18 +41,21 @@ epi_2by2 <- function(x,
                           msg = "x must be a dataframe, table or numeric vector length 4")
 
   if (!"data.frame" %in% class(x)){
-    return(epiR::epi.2by2(matrix(x, 2, 2, byrow = TRUE), ...))
+    return(epiR::epi.2by2(matrix(x, 2, 2, byrow = TRUE), method = method, ...))
   }
 
   df <- x
 
   outcome <- rlang::enquo(outcome)
   exposure <- rlang::enquo(exposure)
+  time_at_risk <- rlang::enquo(time_at_risk)
+
 
   df <- dplyr::mutate(
     df,
     ..outcome.. = !! outcome,
-    ..exposure.. = !! exposure
+    ..exposure.. = !! exposure,
+    ..time_at_risk.. = !! time_at_risk
   )
 
   assertthat::assert_that(
@@ -61,12 +67,24 @@ epi_2by2 <- function(x,
     msg = "Exposure must be TRUE/FALSE"
   )
 
+  if (method == "cohort.time"){
+    df <- dplyr::group_by(df, ..exposure..)
+    df <- dplyr::summarise(df, cases = sum(..outcome..),
+                     time_at_risk = sum(..time_at_risk..))
+    tab <- c(df[1, "cases", drop = TRUE],
+             df[2, "cases", drop = TRUE],
+             df[1, "time_at_risk", drop = TRUE],
+             df[2, "time_at_risk", drop = TRUE])
+    tab <- matrix(tab, 2, 2, byrow = FALSE)
+    epiR::epi.2by2(tab, method = "cohort.time", ...)
+  } else {
   tab <- table(
     TF_to_posneg(df[["..exposure.."]]),
     TF_to_posneg(df[["..outcome.."]])
   )
 
   epiR::epi.2by2(tab, ...)
+  }
 }
 
 
