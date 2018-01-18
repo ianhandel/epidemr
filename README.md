@@ -10,7 +10,7 @@ It doesn't do anything clever - just wraps existing epidemiology functions (from
 It also provides 'tidying' functions to convert output to dataframes and provides simple plotting methods.
 
 ## Currently in development
-...so if you use it check it against the underlying functions it calls!
+... so if you use it check it against the underlying functions it calls!
 
 ## But functions in draft so far...
 
