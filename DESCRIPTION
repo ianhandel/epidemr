@@ -1,14 +1,13 @@
 Package: epidemr
 Type: Package
 Title: Tidy Epidemiology in R
-Version: 0.1.0.9000
+Version: 0.1.1.9000
 Authors@R: as.person(c(
     "Stella Mazeri <stella.mazeri@ed.ac.uk> [aut, cre]", 
     "Ian Handel <ian.handel@ed.ac.uk> [aut]"
   ))
 Maintainer: Stella Mazeri <stella.mazeri@ed.ac.uk>
-Description: Need more about what it does.
-        And how.
+Description: Pre-processes data from either simple vectors or dataframes which is then sent to rleevant epidemiology functions. Also provides some tidying functions for output and plot methods.
 License: MIT + file LICENSE
 URL: https://github.com/ianhandel/epidemr
 BugReports: https://github.com/ianhandel/epidemr
