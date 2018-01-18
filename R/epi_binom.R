@@ -33,44 +33,51 @@ epi_binom <- function(x,
                       conf_level = 0.95,
                       methods = "all",
                       digits,
-                      ...){
+                      ...) {
+  if (length(x) == 1 & !is.list(x)) {
+    res <- binom::binom.confint(
+      x = x,
+      n = y,
+      conf.level = conf_level,
+      methods = methods,
+      ...
+    )
+  } else {
+    var <- rlang::enquo(y)
 
+    x <- dplyr::mutate(x, ..var = !! var)
 
-  if(length(x) == 1  & !is.list(x)){
-    res <- binom::binom.confint(x = x,
-                                n = y,
-                                conf.level = conf_level,
-                                methods = methods,
-                                ...)
-  }else{
+    var_vec <- x[["..var"]]
 
-  var <- rlang::enquo(y)
+    col_name <- rlang::quo_text(var)
 
-  x <- dplyr::mutate(x, ..var = !!var)
-
-  var_vec <- x[["..var"]]
-
-  col_name <- rlang::quo_text(var)
-
-  res <- binom::binom.confint(x = sum(var_vec),
-                              n = sum(!is.na(var_vec)),
-                              conf.level = conf_level,
-                              methods = methods,
-                              ...)
+    res <- binom::binom.confint(
+      x = sum(var_vec),
+      n = sum(!is.na(var_vec)),
+      conf.level = conf_level,
+      methods = methods,
+      ...
+    )
   }
   # add conf_level as variable
-  res <- dplyr::mutate(res,
-                       conf_level = conf_level)
+  res <- dplyr::mutate(
+    res,
+    conf_level = conf_level
+  )
 
   res <- dplyr::rename(res, proportion = mean)
 
-  if(!missing(digits)){
-    res <- tibble::as_tibble(purrr::map_if(res,
-                                           purrr::is_bare_numeric,
-                                           round, digits))
+  if (!missing(digits)) {
+    res <- tibble::as_tibble(purrr::map_if(
+      res,
+      purrr::is_bare_numeric,
+      round, digits
+    ))
   }
 
-  res <- structure(tibble::as.tibble(res),
-                   class = c("epi_binom", "tbl_df", "tbl", "data.frame"))
+  res <- structure(
+    tibble::as.tibble(res),
+    class = c("epi_binom", "tbl_df", "tbl", "data.frame")
+  )
   return(res)
 }

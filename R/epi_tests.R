@@ -30,14 +30,17 @@ epi_tests <- function(x,
                       test = NULL,
                       goldstandard = NULL,
                       ...) {
+  assertthat::assert_that(
+    any(class(x) %in% c(
+      "data.frame",
+      "tbl"
+    ) |
+      class(x) == "numeric" & length(x) == 4 |
+      class(x) == "table"),
+    msg = "x must be a dataframe, table or numeric vector length 4"
+  )
 
-  assertthat::assert_that(any(class(x) %in% c("data.frame",
-                                              "tbl") |
-                                class(x) == "numeric" & length(x) == 4 |
-                                class(x) == "table"),
-                          msg = "x must be a dataframe, table or numeric vector length 4")
-
-  if (class(x) == "numeric" | class(x) == "table"){
+  if (class(x) == "numeric" | class(x) == "table") {
     return(epiR::epi.tests(matrix(x, 2, 2, byrow = TRUE), ...))
   }
 
@@ -81,7 +84,7 @@ epi_tests <- function(x,
 #' res <- epi_tests(mtcars, mpg < 25, cyl > 4, conf.level = 0.95)
 #' tidy(res)
 
-tidy.epi.tests <- function(x, ...){
+tidy.epi.tests <- function(x, ...) {
   res <- dplyr::bind_rows(x$rval, .id = "variable")
   dplyr::mutate(res, conf.level = x$conf.level)
 }
@@ -98,21 +101,21 @@ tidy.epi.tests <- function(x, ...){
 #' res <- epi_tests(mtcars, am == 1, cyl == 4, conf.level = 0.95)
 #' plot(res)
 
-plot.epi.tests <- function(x, ...){
-
-  df <- dplyr::bind_rows(x$rval[c("se","sp")], .id = "parameter")
-  g <- ggplot2::ggplot(df, ggplot2::aes_(x = ~parameter,
-                                  y = ~est,
-                                  ymin = ~lower,
-                                  ymax = ~upper)) +
+plot.epi.tests <- function(x, ...) {
+  df <- dplyr::bind_rows(x$rval[c("se", "sp")], .id = "parameter")
+  g <- ggplot2::ggplot(df, ggplot2::aes_(
+    x = ~parameter,
+    y = ~est,
+    ymin = ~lower,
+    ymax = ~upper
+  )) +
     ggplot2::geom_errorbar(width = 0.1) +
     ggplot2::geom_point() +
-    ggplot2::labs(x = "Parameter",
-                  y = "Estimate",
-                  caption = paste0(x$conf.level * 100, "% CI")) +
-    ggplot2::ylim(c(0,1))
+    ggplot2::labs(
+      x = "Parameter",
+      y = "Estimate",
+      caption = paste0(x$conf.level * 100, "% CI")
+    ) +
+    ggplot2::ylim(c(0, 1))
   g
 }
-
-
-

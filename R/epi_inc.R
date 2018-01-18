@@ -29,21 +29,23 @@ epi_inc <- function(x,
                     methods = "exact",
                     ...) {
   if ("data.frame" %in% class(x)) {
-     cases <- rlang::enquo(y)
-     time_at_risk <- rlang::enquo(z)
+    cases <- rlang::enquo(y)
+    time_at_risk <- rlang::enquo(z)
 
-     x <- dplyr::mutate(x,
-                         ..cases = !!cases,
-                         ..time_at_risk = !!time_at_risk)
-     n_cases <- sum(x[["..cases"]])
-     time_at_risk <- sum(x[["..time_at_risk"]])
-     res <- epiR::epi.conf(
-       matrix(c(n_cases, time_at_risk), nrow = 1),
-       conf.level = conf_level,
-       ctype = "inc.rate",
-       method = methods,
-       ...
-     )
+    x <- dplyr::mutate(
+      x,
+      ..cases = !! cases,
+      ..time_at_risk = !! time_at_risk
+    )
+    n_cases <- sum(x[["..cases"]])
+    time_at_risk <- sum(x[["..time_at_risk"]])
+    res <- epiR::epi.conf(
+      matrix(c(n_cases, time_at_risk), nrow = 1),
+      conf.level = conf_level,
+      ctype = "inc.rate",
+      method = methods,
+      ...
+    )
   } else {
     res <- epiR::epi.conf(
       matrix(c(x, y), nrow = 1),

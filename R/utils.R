@@ -31,9 +31,8 @@ TF_to_posneg <- function(x) {
 
 epi_table <- function(df,
                       outcome, exposure,
-                      outcome_labels = c("diseased","healthy"),
-                      exposure_labels = c("exposed", "unexposed")){
-
+                      outcome_labels = c("diseased", "healthy"),
+                      exposure_labels = c("exposed", "unexposed")) {
   assertthat::assert_that(any(class(df) %in% c("data.frame")))
 
   outcome <- rlang::enquo(outcome)
@@ -54,11 +53,13 @@ epi_table <- function(df,
     msg = "Exposure must be TRUE/FALSE"
   )
 
-  tab <- matrix(table(
-    df[["..exposure.."]],
-    df[["..outcome.."]]
-  ), 2, 2,
-  dimnames = list(exposure_labels, outcome_labels))
+  tab <- matrix(
+    table(
+      df[["..exposure.."]],
+      df[["..outcome.."]]
+    ), 2, 2,
+    dimnames = list(exposure_labels, outcome_labels)
+  )
 
   tab
 }

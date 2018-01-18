@@ -14,17 +14,16 @@
 #' res <- epi_tests(mtcars, mpg < 25, cyl > 4, conf.level = 0.95)
 #' epi_predval(res)
 
-epi_predval <-function(X = NULL, Y = NULL, se = NULL, sp = NULL,
-                       prevalences = seq(0, 1, 0.01)){
-
-  if(class(X) == "epi.tests"){
+epi_predval <- function(X = NULL, Y = NULL, se = NULL, sp = NULL,
+                        prevalences = seq(0, 1, 0.01)) {
+  if (class(X) == "epi.tests") {
     se <- X$rval$se$est
     sp <- X$rval$sp$est
-  }else{
-    if(!is.null(se) & !is.null(sp)){
+  } else {
+    if (!is.null(se) & !is.null(sp)) {
       se <- se
       sp <- sp
-    }else{
+    } else {
       se <- X
       sp <- Y
     }
@@ -34,8 +33,10 @@ epi_predval <-function(X = NULL, Y = NULL, se = NULL, sp = NULL,
   ppv <- (se * p) / ((se * p) + ((1 - sp) * (1 - p)))
   npv <- sp * (1 - p) / ((sp * (1 - p) + (1 - se) * p))
 
-  structure(tibble::tibble(se, sp, prev = p, ppv, npv),
-            class = c("epi_predval", class(tibble::tibble())))
+  structure(
+    tibble::tibble(se, sp, prev = p, ppv, npv),
+    class = c("epi_predval", class(tibble::tibble()))
+  )
 }
 
 
@@ -53,11 +54,13 @@ epi_predval <-function(X = NULL, Y = NULL, se = NULL, sp = NULL,
 
 
 
-plot.epi_predval <- function(x, y = NULL, ...){
+plot.epi_predval <- function(x, y = NULL, ...) {
   ggplot2::ggplot(x, ggplot2::aes_(x = ~prev)) +
     ggplot2::geom_line(ggplot2::aes_(y = ~ppv, colour = "positive")) +
     ggplot2::geom_line(ggplot2::aes_(y = ~npv, colour = "negative")) +
-    ggplot2::labs(x = "Prevalence",
-         y = "Predicitive value",
-         colour = "Predicitive \nvalue")
+    ggplot2::labs(
+      x = "Prevalence",
+      y = "Predicitive value",
+      colour = "Predicitive \nvalue"
+    )
 }

@@ -28,25 +28,29 @@
 
 
 epi_2by2 <- function(x,
-                      outcome = NULL,
-                      exposure = NULL,
-                      time_at_risk = NULL,
-                      method = "cross.sectional",
-                      ...) {
+                     outcome = NULL,
+                     exposure = NULL,
+                     time_at_risk = NULL,
+                     method = "cross.sectional",
+                     ...) {
 
   # sileces R CMD checks
   ..outcome.. <- NULL
   ..exposure.. <- NULL
   ..time_at_risk.. <- NULL
 
-  assertthat::assert_that(any(class(x) %in% c("data.frame",
-                                              "tbl") |
-                                class(x) == "numeric" & length(x) == 4 |
-                                class(x) == "table" |
-                                class(x) == "matrix"),
-                          msg = "x must be a dataframe, table or numeric vector length 4")
+  assertthat::assert_that(
+    any(class(x) %in% c(
+      "data.frame",
+      "tbl"
+    ) |
+      class(x) == "numeric" & length(x) == 4 |
+      class(x) == "table" |
+      class(x) == "matrix"),
+    msg = "x must be a dataframe, table or numeric vector length 4"
+  )
 
-  if (!"data.frame" %in% class(x)){
+  if (!"data.frame" %in% class(x)) {
     return(epiR::epi.2by2(matrix(x, 2, 2, byrow = TRUE), method = method, ...))
   }
 
@@ -73,23 +77,27 @@ epi_2by2 <- function(x,
     msg = "Exposure must be TRUE/FALSE"
   )
 
-  if (method == "cohort.time"){
+  if (method == "cohort.time") {
     df <- dplyr::group_by(df, ..exposure..)
-    df <- dplyr::summarise(df, cases = sum(..outcome..),
-                     time_at_risk = sum(..time_at_risk..))
-    tab <- c(df[2, "cases"] %>% as.numeric(),
-             df[1, "cases"] %>% as.numeric(),
-             df[2, "time_at_risk"] %>% as.numeric(),
-             df[1, "time_at_risk"] %>% as.numeric())
+    df <- dplyr::summarise(
+      df, cases = sum(..outcome..),
+      time_at_risk = sum(..time_at_risk..)
+    )
+    tab <- c(
+      df[2, "cases"] %>% as.numeric(),
+      df[1, "cases"] %>% as.numeric(),
+      df[2, "time_at_risk"] %>% as.numeric(),
+      df[1, "time_at_risk"] %>% as.numeric()
+    )
     tab <- matrix(tab, 2, 2, byrow = FALSE)
     epiR::epi.2by2(tab, method = "cohort.time", ...)
   } else {
-  tab <- table(
-    TF_to_posneg(df[["..exposure.."]]),
-    TF_to_posneg(df[["..outcome.."]])
-  )
+    tab <- table(
+      TF_to_posneg(df[["..exposure.."]]),
+      TF_to_posneg(df[["..outcome.."]])
+    )
 
-  epiR::epi.2by2(tab, method = method, ...)
+    epiR::epi.2by2(tab, method = method, ...)
   }
 }
 
@@ -103,9 +111,11 @@ epi_2by2 <- function(x,
 #' @example tidy(res)
 
 
-tidy.epi.2by2 <- function(x, ...){
-  assertthat::assert_that(class(x) == "epi.2by2",
-                          msg = "x must be an epi.2by2 object")
+tidy.epi.2by2 <- function(x, ...) {
+  assertthat::assert_that(
+    class(x) == "epi.2by2",
+    msg = "x must be an epi.2by2 object"
+  )
   res <- x[["res"]]
 
   res <- purrr::keep(res, ~identical(names(.x), c("est", "lower", "upper")))
