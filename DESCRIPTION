@@ -10,6 +10,8 @@ Maintainer: Stella Mazeri <stella.mazeri@ed.ac.uk>
 Description: Need more about what it does.
         And how.
 License: MIT + file LICENSE
+URL: https://github.com/ianhandel/epidemr
+BugReports: https://github.com/ianhandel/epidemr
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
@@ -19,11 +21,8 @@ Imports:
     dplyr,
     epiR,
     ggplot2,
-    graphics,
     purrr,
     rlang,
-    stats,
     tibble,
-    viridis
 Suggests: testthat,
     covr

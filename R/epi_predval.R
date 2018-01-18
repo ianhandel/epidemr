@@ -30,8 +30,8 @@ epi_predval <- function(X = NULL, Y = NULL, se = NULL, sp = NULL,
   }
   p <- prevalences
 
-  ppv <- (se * p) / ((se * p) + ((1 - sp) * (1 - p)))
-  npv <- sp * (1 - p) / ((sp * (1 - p) + (1 - se) * p))
+  ppv <- (se * p) / ( (se * p) + ( (1 - sp) * (1 - p)))
+  npv <- sp * (1 - p) / ( (sp * (1 - p) + (1 - se) * p))
 
   structure(
     tibble::tibble(se, sp, prev = p, ppv, npv),
@@ -47,6 +47,10 @@ epi_predval <- function(X = NULL, Y = NULL, se = NULL, sp = NULL,
 #' @param y ignored
 #' @param ... ignored
 #' @return ggplot object
+#' @importFrom ggplot2 ggplot
+#' @importFrom ggplot2 aes_
+#' @importFrom ggplot2 labs
+#' @importFrom ggplot2 geom_line
 #' @export
 #' @examples
 #' pv <- epi_predval(se = 0.90, sp = 0.99)
@@ -55,10 +59,10 @@ epi_predval <- function(X = NULL, Y = NULL, se = NULL, sp = NULL,
 
 
 plot.epi_predval <- function(x, y = NULL, ...) {
-  ggplot2::ggplot(x, ggplot2::aes_(x = ~prev)) +
-    ggplot2::geom_line(ggplot2::aes_(y = ~ppv, colour = "positive")) +
-    ggplot2::geom_line(ggplot2::aes_(y = ~npv, colour = "negative")) +
-    ggplot2::labs(
+  ggplot(x, aes_(x = ~prev)) +
+    geom_line(aes_(y = ~ppv, colour = "positive")) +
+    geom_line(aes_(y = ~npv, colour = "negative")) +
+    labs(
       x = "Prevalence",
       y = "Predicitive value",
       colour = "Predicitive \nvalue"

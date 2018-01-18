@@ -20,6 +20,7 @@
 #' @details -----------	----------	-------------
 #' @details   Total	    a + c	      b + d
 #' @details -----------	----------	-------------
+#' @importFrom dplyr %>%
 #' @export
 #' @examples
 #' head(mtcars)
@@ -107,8 +108,12 @@ epi_2by2 <- function(x,
 #' @param x An epi.2by2 object
 #' @param ... other arguments (ignored)
 #' @export
-#' @example res <- epi_2by2(mtcars, am == 1, cyl == 4, conf.level = 0.95)
-#' @example tidy(res)
+#' @examples
+#' res <- epi_2by2(mtcars,
+#'                   am == 1,
+#'                   cyl == 4,
+#'                   conf.level = 0.95)
+#' tidy(res)
 
 
 tidy.epi.2by2 <- function(x, ...) {

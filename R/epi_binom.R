@@ -49,8 +49,6 @@ epi_binom <- function(x,
 
     var_vec <- x[["..var"]]
 
-    col_name <- rlang::quo_text(var)
-
     res <- binom::binom.confint(
       x = sum(var_vec),
       n = sum(!is.na(var_vec)),
