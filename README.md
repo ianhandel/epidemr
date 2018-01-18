@@ -9,11 +9,9 @@ It doesn't do anything clever - just wraps existing epidemiology functions (from
 
 It also provides 'tidying' functions to convert output to dataframes and provides simple plotting methods.
 
-## Currently in development - so don't use it!
+## Currently in development - so if you use it check it against the underlying functions it calls!
 
 ## But functions in draft so far...
-
-(Although epi_tests and epi_2by2 may be removed and this package just provide epi_tables helper for epiR functions)
 
 * __epi_tests__ - evaluation of diagnostic test vs a gold standard (also adds plot(...) method)
 * __epi_binom__ - estimate proportions with binomial confidence intervals 
