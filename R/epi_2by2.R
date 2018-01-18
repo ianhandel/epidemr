@@ -77,10 +77,10 @@ epi_2by2 <- function(x,
     df <- dplyr::group_by(df, ..exposure..)
     df <- dplyr::summarise(df, cases = sum(..outcome..),
                      time_at_risk = sum(..time_at_risk..))
-    tab <- c(df[2, "cases", drop = TRUE],
-             df[1, "cases", drop = TRUE],
-             df[2, "time_at_risk", drop = TRUE],
-             df[1, "time_at_risk", drop = TRUE])
+    tab <- c(df[2, "cases"] %>% as.numeric(),
+             df[1, "cases"] %>% as.numeric(),
+             df[2, "time_at_risk"] %>% as.numeric(),
+             df[1, "time_at_risk"] %>% as.numeric())
     tab <- matrix(tab, 2, 2, byrow = FALSE)
     epiR::epi.2by2(tab, method = "cohort.time", ...)
   } else {
