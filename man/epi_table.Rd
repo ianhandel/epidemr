@@ -4,8 +4,13 @@
 \alias{epi_table}
 \title{Utility function to convert df and columns to matrix for epiR functions}
 \usage{
-epi_table(df, outcome, exposure, outcome_labels = c("diseased", "healthy"),
-  exposure_labels = c("exposed", "unexposed"))
+epi_table(
+  df,
+  outcome,
+  exposure,
+  outcome_labels = c("diseased", "healthy"),
+  exposure_labels = c("exposed", "unexposed")
+)
 }
 \arguments{
 \item{df}{dataframe to source 2 x 2 table}

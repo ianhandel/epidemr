@@ -4,8 +4,13 @@
 \alias{epi_predval}
 \title{Generate ppv and npv from test evaluation and prevalence range}
 \usage{
-epi_predval(X = NULL, Y = NULL, se = NULL, sp = NULL,
-  prevalences = seq(0, 1, 0.01))
+epi_predval(
+  X = NULL,
+  Y = NULL,
+  se = NULL,
+  sp = NULL,
+  prevalences = seq(0, 1, 0.01)
+)
 }
 \arguments{
 \item{X}{An epiR::epi.tests object or test sensitivity}
