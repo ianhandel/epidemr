@@ -17,8 +17,8 @@
 epi_predval <- function(X = NULL, Y = NULL, se = NULL, sp = NULL,
                         prevalences = seq(0, 1, 0.01)) {
   if (class(X) == "epi.tests") {
-    se <- X$rval$se$est
-    sp <- X$rval$sp$est
+    se <- X$detail$se$est
+    sp <- X$detail$sp$est
   } else {
     if (!is.null(se) & !is.null(sp)) {
       se <- se

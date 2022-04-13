@@ -102,7 +102,7 @@ tidy.epi.tests <- function(x, ...) {
 #' plot(res)
 
 plot.epi.tests <- function(x, ...) {
-  df <- dplyr::bind_rows(x$rval[c("se", "sp")], .id = "parameter")
+  df <- dplyr::bind_rows(x$detail[c("se", "sp")], .id = "parameter")
   g <- ggplot2::ggplot(df, ggplot2::aes_(
     x = ~parameter,
     y = ~est,
